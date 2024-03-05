@@ -147,9 +147,8 @@ fetch('data/prefecture.geojson')
     prefectureLayer = L.geoJSON(data, {
       style: function (feature) {
         return {
-          fillColor: 'white',
-          fillOpacity: 0.3,
-          color: 'grey',
+          fillOpacity: 0,
+          color: 'white',
           weight: 1.25
         };
       },

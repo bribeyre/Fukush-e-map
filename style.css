@@ -363,3 +363,54 @@ select {
   border-radius: 5px;
   z-index: 1000; /* Assurez-vous que la légende est au-dessus des autres éléments de la carte */
 }
+
+
+/* Ajouter un contour blanc autour de la légende */
+.legendGroupe {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ajouter une ombre si désiré */
+}
+
+/* page d'accueil */
+
+.contexte_bis {
+  width: 1100px; /* Largeur du rectangle */
+  height: 350px; /* Hauteur du rectangle */
+  background-color: #2C7185; /* Couleur de fond */
+  border: 2px solid #2C7185; /* Bordure du rectangle */
+  margin-top: 50px; /* Marge au-dessus du rectangle */
+  margin-left: auto; /* Centrer horizontalement */
+  margin-right: auto; /* Centrer horizontalement */
+  border-radius: 20px; /* Rayon de courbure des coins */
+  padding: 30px; /* Marges à l'intérieur du rectangle */
+  color: white; /* Couleur du texte */
+}
+
+.trajectoire {
+  width: 1100px; /* Largeur du rectangle */
+  height: 350px; /* Hauteur du rectangle */
+  background-color: #5A9CB1; /* Couleur de fond */
+  border: 2px solid #5A9CB1; /* Bordure du rectangle */
+  margin-top: 50px; /* Marge au-dessus du rectangle */
+  margin-left: auto; /* Centrer horizontalement */
+  margin-right: auto; /* Centrer horizontalement */
+  border-radius: 20px; /* Rayon de courbure des coins */
+  padding: 30px; /* Marges à l'intérieur du rectangle */
+  color: white; /* Couleur du texte */
+}
+
+.risque {
+  width: 1100px; /* Largeur du rectangle */
+  height: 350px; /* Hauteur du rectangle */
+  background-color: #5A7B85; /* Couleur de fond */
+  border: 2px solid #5A7B85; /* Bordure du rectangle */
+  margin-top: 50px; /* Marge au-dessus du rectangle */
+  margin-left: auto; /* Centrer horizontalement */
+  margin-right: auto; /* Centrer horizontalement */
+  border-radius: 20px; /* Rayon de courbure des coins */
+  padding: 30px; /* Marges à l'intérieur du rectangle */
+  color: white; /* Couleur du texte */
+}

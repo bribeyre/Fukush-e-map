@@ -16,6 +16,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+
 // PLEIN ECRAN
 // Création d'un contrôle personnalisé pour le bouton de plein écran
 var fullscreenControl = L.Control.extend({
@@ -147,21 +148,10 @@ fetch('data/prefecture.geojson')
     prefectureLayer = L.geoJSON(data, {
       style: function (feature) {
         return {
-          fillColor: 'white',
-          fillOpacity: 0.3,
-          color: 'grey',
+          fillOpacity: 0,
+          color: 'white',
           weight: 1.25
         };
-      },
-      onEachFeature: function (feature, layer) {
-        var popupprefecture = "<b>Nom préfecture: </b>" + feature.properties.prefecture + "<br>" +
-          "<b>Résidant en 2011: </b>" + feature.properties['2011'] + "<br>" +
-          "<b>Résidant en 2013: </b>" + feature.properties['2013'] + "<br>" +
-          "<b>Résidant en 2014: </b>" + feature.properties['2014'] + "<br>" +
-          "<b>Résidant en 2015: </b>" + feature.properties['2015'] + "<br>" +
-          "<b>Résidant en 2016: </b>" + feature.properties['2016'] + "<br>" +
-          "<b>Résidant en 2017: </b>" + feature.properties['2017'];
-        layer.bindPopup(popupprefecture);
       }
     }).addTo(map);
   })
@@ -191,6 +181,10 @@ function showSecondMapAndHeatmap() {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map2);
+    L.control.scale({
+      position: 'topright'
+    }).addTo(map2);
+    map2.zoomControl.remove();
 
     // Si la checkbox est cochée, afficher la heatmap
     if (document.getElementById('showSecondMapCheckbox').checked) {
@@ -216,7 +210,7 @@ function fetchHeatmapData(map2) {
       });
       // Créer la heatmap avec les données et l'ajouter à map2
       var heat = L.heatLayer(heatData, {
-        radius: 20,
+        radius: 10,
         gradient: {
           0.25: 'blue',   // Low values
           0.5: 'lime',    // Moderate values
@@ -239,23 +233,37 @@ function syncMaps() {
     map.setView(map2.getCenter(), map2.getZoom(), { animate: false });
   });
 }
+document.getElementById('showSecondMapCheckbox').addEventListener('change', function() {
+  var mapContainer1 = document.getElementById('mapContainer1');
+  if (this.checked) {
+    // Si la case à cocher est cochée, changer la largeur de #mapContainer1 à 65%
+    mapContainer1.style.width = '65%';
+    tileLayer.attributionControl.removeAttribution('');
+  } else {
+    // Sinon, rétablir la largeur de #mapContainer1 à 100%
+    mapContainer1.style.width = '100%';
+    tileLayer.attributionControl.addAttribution('<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>');
+  }
+});
 
 // Ajouter un écouteur d'événements au changement de l'état de la checkbox pour la deuxième carte et la heatmap
 document.getElementById('showSecondMapCheckbox').addEventListener('change', function () {
   showSecondMapAndHeatmap();
 });
-// FIN AJOUT HEAMAP
-// Créer et ajouter le contrôle de titre à la carte
-var TitleControl = L.Control.extend({
-  onAdd: function () {
-    var title = L.DomUtil.create('div', 'leaflet-control-title');
-    title.innerHTML = '<h2>Mon Titre de Carte</h2>';
-    return title;
-  },
 
-  onRemove: function () {
-    // Méthode obligatoire, mais nous n'avons pas besoin de faire quelque chose ici
-  }
-});
-// Ajout du contrôle de titre à la carte map2
-new TitleControl().addTo(map2);
+// FIN AJOUT HEAMAP
+
+// AJOUT D'UNE LEGEND 
+
+var legendControl = L.control({ position: 'bottomright' });
+
+// Définir le contenu de la légende
+legendControl.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'legendGroupe');
+    div.innerHTML = '<h4>Légende</h4>' +
+        '<p>Insérer votre légende ici</p>';
+    return div;
+};
+
+// Ajouter le contrôle de légende à la carte
+legendControl.addTo(map);
