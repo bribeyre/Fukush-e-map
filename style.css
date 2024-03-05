@@ -414,3 +414,7 @@ select {
   padding: 30px; /* Marges à l'intérieur du rectangle */
   color: white; /* Couleur du texte */
 }
+#titrepopup{
+  color:#002530;
+  font-size:medium;
+}

@@ -94,7 +94,7 @@ function zoomToFukushima() {
 
 // On importe la futur symbologie de la centrale nucléaire qui sera une image
 var customIcon = L.icon({
-  iconUrl: 'img/centrale.png',
+  iconUrl: 'img/nuclear.png',
   iconSize: [32, 32]
 });
 

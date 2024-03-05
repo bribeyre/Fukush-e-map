@@ -16,8 +16,8 @@
 
   <!-- Zone de texte réservé au contexte -->
   <div class="contexte_bis">
-    <h1 class="mb-0">Contexte du Projet</h1>
-    <p class="lead my-3"> Pitch de 3 - 4 lignes</p>
+    <h1 class="mb-0">Fukush-e-map, la cartographie du risques 2.0</h1>
+    <p class="lead my-3"> "Pitch de 3 - 4 lignes"</p>
     <p class="card-text mb-auto" style="text-align: justify;"> Dans l'application ci-présente, il va vous être
       donné de voir les résultats produits par le projet DILEM. Ce projet de recherche à opéré de 2012 à 2017 et
       c'est consacré au suivi de
@@ -51,23 +51,6 @@
     </div>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var imageContainer = document.getElementById('fullscreen-container_3');
-      imageContainer.addEventListener('click', function () {
-        var image = document.getElementById('fullscreen-image_3');
-        if (image.requestFullscreen) {
-          image.requestFullscreen();
-        } else if (image.msRequestFullscreen) {
-          image.msRequestFullscreen();
-        } else if (image.mozRequestFullScreen) {
-          image.mozRequestFullScreen();
-        } else if (image.webkitRequestFullscreen) {
-          image.webkitRequestFullscreen();
-        }
-      });
-    });
-  </script>
 
   <!-- Zone de texte réservé à la perception du risque par groupe -->
   <div class="risque">
@@ -88,37 +71,18 @@
     </div>
   </div>
 
-  <!-- Fonction de plein écran au clique sur une image  -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var imageContainer = document.getElementById('fullscreen-container_4');
-      imageContainer.addEventListener('click', function () {
-        var image = document.getElementById('fullscreen-image_4');
-        if (image.requestFullscreen) {
-          image.requestFullscreen();
-        } else if (image.msRequestFullscreen) {
-          image.msRequestFullscreen();
-        } else if (image.mozRequestFullScreen) {
-          image.mozRequestFullScreen();
-        } else if (image.webkitRequestFullscreen) {
-          image.webkitRequestFullscreen();
-        }
-      });
-    });
-  </script>
-
   <!-- Bouton pour afficher la pop-up -->
   <button id="popupButton"
-    style="position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; background-color: #B32A2A; border: black; border-radius: 50%; cursor: pointer;">
-    <span style="color: #EEE9E4; font-size: 20px;">?</span>
+    style="position: fixed; bottom: 15px; right: 15px; width: 30px; height: 30px; background-color: #002530; border: black; border-radius: 50%; cursor: pointer;">
+    <span style="color: #EEE9E4; font-size: 15px;">?</span>
   </button>
 
   <div id="popupContainer"
-    style="display: none; position: fixed; bottom: 15px; left: 15px; background-color: #EEE9E4; padding: 13px; border: 0.2px solid black; border-radius: 10px;">
-    <h3 style="text-align: center;"><a
-        href="https://www.lemonde.fr/planete/article/2021/03/11/fukushima-que-s-est-il-passe-il-y-a-dix-ans_6072695_3244.html"
+    style="display: none; position: fixed; bottom: 10px; right: 10px; background-color: #EEE9E4; padding: 10px; border: 0.2px solid black; border-radius: 10px;">
+    <h3 style="text-align: center;"><a id="titrepopup"
+        href="https://www.asn.fr/l-asn-informe/situations-d-urgence/accident-de-fukushima"
         target="_blank">Fukushima, que s'est il passé ?</a>
-      <button id="closeButton" style="background: none; border: none; font-size: 24px; cursor: pointer;">×</button>
+      <button id="closeButton" style="background: none; border: 1px; font-size: 24px; cursor: pointer;">×</button>
     </h3>
   </div>
 
@@ -153,5 +117,6 @@
 
 <!-- Chargement d'un fichier de fonctionnalité JS en locale qui permet l'affichage de notre Header et de notre Footer à notre page -->
 <script src="js/Jquery.js"></script>
+
 
 </html>
