@@ -121,25 +121,6 @@ ChargerCentrale()
   });
 
 // Affichage de la prefecture
-var prefectureVisible = true;
-
-document.getElementById('togglePrefecture').addEventListener('click', function () {
-  toggleLayer(prefectureLayer, 'togglePrefecture');
-});
-
-function toggleLayer(layer, buttonId) {
-  var button = document.getElementById(buttonId);
-  if (map.hasLayer(layer)) {
-    map.removeLayer(layer);
-    prefectureVisible = false;
-    button.innerHTML = '<i class="fas fa-eye"></i> Afficher ' + buttonId.split('toggle')[1];
-  } else {
-    layer.addTo(map);
-    prefectureVisible = true;
-    button.innerHTML = '<i class="fas fa-eye-slash"></i> Masquer ' + buttonId.split('toggle')[1];
-  }
-}
-
 
 // Fetch pour récupérer les données des préfectures
 fetch('data/prefecture.geojson')
@@ -254,16 +235,3 @@ document.getElementById('showSecondMapCheckbox').addEventListener('change', func
 // FIN AJOUT HEAMAP
 
 // AJOUT D'UNE LEGEND 
-
-var legendControl = L.control({ position: 'bottomright' });
-
-// Définir le contenu de la légende
-legendControl.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'legendGroupe');
-    div.innerHTML = '<h4>Légende</h4>' +
-        '<p>Insérer votre légende ici</p>';
-    return div;
-};
-
-// Ajouter le contrôle de légende à la carte
-legendControl.addTo(map);

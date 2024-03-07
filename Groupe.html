@@ -13,13 +13,80 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="dist_side_panel/leaflet-sidepanel.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/animation_page_accueil.css">
+  <link rel="stylesheet" href="composant_copy/Animation_header.css">
+  <link rel="stylesheet" href="composant_copy/header.css">
 
   <!-- Full screen -->
 </head>
 
 <body>
   <!-- Header -->
-  <div id="header"></div>
+  <div id="body2">
+    <div class="container">
+        <header id="header2" class="border-bottom lh-1 py-1 fixed-top">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-6 pt-1">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="img/logo.png" alt="Bootstrap" width=100% height=100%>
+                        <a class="navbar-brand" href="index.html">Fukush-e-map</a>
+                    </a>
+                </div>
+                <div class="col-6">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                        <div class="card-container2">
+                            <div class="card2">
+                                <a id="lienImage1" href="index.html">
+                                    <div class="card--display2"
+                                        style="display: flex; align-items: center; justify-content: center;">
+                                        <img id="imageChanger1" src="img/Centrale_avant.png"class="person-icon">
+                                    </div>
+                                </a>
+                                <div class="card--border2"></div>
+                            </div>
+                        </div>
+
+                        <div class="card-container2">
+                            <div class="card2">
+                                <a id="lienImage2" href="Individue.html">
+                                    <div class="card--display2"
+                                        style="display: flex; align-items: center; justify-content: center;">
+                                        <img id="imageChanger2" src="img/Utilisateur_avant.png"class="person-icon">
+                                    </div>
+                                </a>
+                                <div class="card--border2"></div>
+                            </div>
+                        </div>
+
+                        <div class="card-container2">
+                            <div class="card2">
+                                <a id="lienImage3" href="Groupe.html">
+                                    <div class="card--display2" style="display: flex; align-items: center; justify-content: center;">
+                                        <img id="imageChanger3" src="img/Groupe_aprés.png" alt="Groupe" class="person-icon">
+                                    </div>
+                                </a>
+                                <div class="card--border2"></div>
+                            </div>
+                        </div>
+
+                        <div class="card-container2" >
+                            <div class="card2" >
+                                <a id="lienImage4" href="Source.html">
+                                    <div class="card--display2"
+                                        style="display: flex; align-items: center; justify-content: center;">
+                                        <img id="imageChanger4" src="img/info_avant.png" alt="Info" class="person-icon">
+                                    </div>
+                                </a>
+                                <div class="card--border2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+</div>
+
   <div id="map-container-wrapper" class="custom-map-container">
     <div id="mapContainer1" class="map">
       <!-- Side Panel left -->
@@ -43,14 +110,6 @@
                 </h1>
                 <h3>Perception du risque</h3>
                 <hr>
-
-                <h5>Division administrative du Japon</h5>
-                <button id="togglePrefecture" class="style_boutons_divisions_adm"
-                  aria-label="Afficher/masquer la couche des préfectures">
-                  <i class="fas fa-eye-slash"></i> Masquer Préfecture
-                </button>
-                <hr>
-
 
                 <div>
                   <h6>Choix du groupe (statut de déplacement)</h6>
@@ -78,19 +137,18 @@
                   <label for="radio2">Zones jugées dangereuses</label><br>
                   <input type="radio" id="radio3" name="radio" value="Zones intersticielles">
                   <label for="radio3">Zones intersticielles</label><br>
-
-                  <hr>
-                  <h6>Carte de mesure officielle diffusée par le gouvernement (en 2019)</h6>
-                  <input type="checkbox" id="showSecondMapCheckbox">
-                  <label for="showSecondMapCheckbox">Afficher la deuxième carte et la heatmap</label>
-
                 </div>
-
                 <hr>
                 <div>
-                  <label for="slider">Choisi une année</label><br>
+                  <label for="slider">Choisir une année pour la perceptions</label><br>
                   <input type="range" id="slider" name="slider" min="0" max="100" value="50">
                 </div>
+                <hr>
+                <div>
+                <h6>Carte de mesure officielle diffusée par le gouvernement daté du 5 février 2024</h6>
+                <input type="checkbox"id="showSecondMapCheckbox">
+                <label for="showSecondMapCheckbox">Afficher la heatmap</label><br>
+              </div>
               </div>
             </div>
           </div>
@@ -128,6 +186,8 @@
   <script src="dist_heatmap/leaflet-heat.js"></script>
   <!-- Your Map Initialization Script -->
   <script src="js/Jquery.js"></script>
+  
+  <script src="js/bouton.js"></script>
   <script src="js/Leaflet_page_group.js"></script>
 </body>
 

@@ -13,12 +13,79 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="dist_side_panel/leaflet-sidepanel.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/animation_page_accueil.css">
+  <link rel="stylesheet" href="composant_copy/Animation_header.css">
+  <link rel="stylesheet" href="composant_copy/header.css">
   <!-- Full screen -->
 </head>
 
 <body>
   <!-- Header -->
-  <div id="header"></div>
+  <div id="body2">
+    <div class="container">
+        <header id="header2" class="border-bottom lh-1 py-1 fixed-top">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-6 pt-1">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="img/logo.png" alt="Bootstrap" width=100% height=100%>
+                        <a class="navbar-brand" href="index.html">Fukush-e-map</a>
+                    </a>
+                </div>
+                <div class="col-6">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                        <div class="card-container2">
+                            <div class="card2">
+                                <a id="lienImage1" href="index.html">
+                                    <div class="card--display2"
+                                        style="display: flex; align-items: center; justify-content: center;">
+                                        <img id="imageChanger1" src="img/Centrale_avant.png"class="person-icon">
+                                    </div>
+                                </a>
+                                <div class="card--border2"></div>
+                            </div>
+                        </div>
+
+                        <div class="card-container2">
+                            <div class="card2">
+                                <a id="lienImage2" href="Individue.html">
+                                    <div class="card--display2"
+                                        style="display: flex; align-items: center; justify-content: center;">
+                                        <img id="imageChanger2" src="img/Utilisateur_aprés.png"class="person-icon">
+                                    </div>
+                                </a>
+                                <div class="card--border2"></div>
+                            </div>
+                        </div>
+
+                        <div class="card-container2">
+                            <div class="card2">
+                                <a id="lienImage3" href="Groupe.html">
+                                    <div class="card--display2" style="display: flex; align-items: center; justify-content: center;">
+                                        <img id="imageChanger3" src="img/Groupe_avant.png" alt="Groupe" class="person-icon">
+                                    </div>
+                                </a>
+                                <div class="card--border2"></div>
+                            </div>
+                        </div>
+
+                        <div class="card-container2" >
+                            <div class="card2" >
+                                <a id="lienImage4" href="Source.html">
+                                    <div class="card--display2"
+                                        style="display: flex; align-items: center; justify-content: center;">
+                                        <img id="imageChanger4" src="img/info_avant.png" alt="Info" class="person-icon">
+                                    </div>
+                                </a>
+                                <div class="card--border2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+</div>
+
   <div id="map-container-wrapper" class="custom-map-container">
     <div id="mapContainer1" class="map">
       <!-- Side Panel left -->
@@ -41,15 +108,6 @@
               <div class="sidepanel-tab-content" data-tab-content="tab-1">
                 </h1>
                 <h4>Trajectoire et Perception Individuelle</h4>
-
-                <!-- Boutons d'affichage des couches administratives -->
-                <hr>
-                <h5>Division administrative du Japon</h5>
-                <button id="togglePrefecture" class="style_boutons_divisions_adm"
-                  aria-label="Afficher/masquer la couche des préfectures">
-                  <i class="fas fa-eye-slash"></i> Masquer Préfecture</button>
-
-                <!-- Choix des individu type -->
                 <hr>
                 <div>
                   <h5>Choix de l'individu type</h5>

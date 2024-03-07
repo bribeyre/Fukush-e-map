@@ -1,4 +1,3 @@
 $(function () {
-  $("#header").load("composant/header.html")
-  $("#footer").load("composant/footer.html");
-});
+  $("#header").load("composant_copy/header.html");
+}); 

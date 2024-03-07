@@ -79,11 +79,11 @@ function zoomToJapan() {
   ];
 
   // Centrer et zoomer sur l'ensemble du Japon
-  map.fitBounds(bounds, { padding: [50, 50] ,maxZoom: 6}); // Vous pouvez ajuster le padding selon vos besoins
+  map.fitBounds(bounds, { padding: [50, 50], maxZoom: 6 }); // Vous pouvez ajuster le padding selon vos besoins
 }
 
 function zoomToFukushima() {
-  map.flyTo([37.41209716212062, 140.11240156125362], 10,{
+  map.flyTo([37.41209716212062, 140.11240156125362], 10, {
     duration: 1, // Durée du déplacement en secondes
     easeLinearity: 0. // Facteur de linéarité de l'animation
   }); // Centrer sur Fukushima
@@ -119,26 +119,6 @@ ChargerCentrale()
     console.error('Erreur lors du chargement des données:', error);
   });
 
-// Affichage de la prefecture
-var prefectureVisible = true;
-
-document.getElementById('togglePrefecture').addEventListener('click', function () {
-  toggleLayer(prefectureLayer, 'togglePrefecture');
-});
-
-function toggleLayer(layer, buttonId) {
-  var button = document.getElementById(buttonId);
-  if (map.hasLayer(layer)) {
-    map.removeLayer(layer);
-    prefectureVisible = false;
-    button.innerHTML = '<i class="fas fa-eye"></i> Afficher ' + buttonId.split('toggle')[1];
-  } else {
-    layer.addTo(map);
-    prefectureVisible = true;
-    button.innerHTML = '<i class="fas fa-eye-slash"></i> Masquer ' + buttonId.split('toggle')[1];
-  }
-}
-
 
 // Fetch pour récupérer les données des préfectures
 fetch('data/prefecture.geojson')
@@ -151,16 +131,6 @@ fetch('data/prefecture.geojson')
           color: 'white',
           weight: 1.25
         };
-      },
-      onEachFeature: function (feature, layer) {
-        var popupprefecture = "<b>Nom préfecture: </b>" + feature.properties.prefecture + "<br>" +
-          "<b>Résidant en 2011: </b>" + feature.properties['2011'] + "<br>" +
-          "<b>Résidant en 2013: </b>" + feature.properties['2013'] + "<br>" +
-          "<b>Résidant en 2014: </b>" + feature.properties['2014'] + "<br>" +
-          "<b>Résidant en 2015: </b>" + feature.properties['2015'] + "<br>" +
-          "<b>Résidant en 2016: </b>" + feature.properties['2016'] + "<br>" +
-          "<b>Résidant en 2017: </b>" + feature.properties['2017'];
-        layer.bindPopup(popupprefecture);
       }
     }).addTo(map);
   })
@@ -415,25 +385,8 @@ addFukushimaLayer("data/fukushima.geojson");
 
 // TEST LEGENDE 
 
-// Créer et ajouter une légende en bas à droite
-var legendIndividu = L.control({position: 'bottomright'});
-
-legendIndividu.onAdd = function (map) {
-  var div = L.DomUtil.create('div', 'legendIndiv');
-  div.innerHTML += '<h5>Perception du risques</h5>';
-
-  // Ajouter deux carrés de couleur avec des légendes
-  div.innerHTML += '<div style="background-color: #afe9ad; width: 20px; height: 20px; display: inline-block; margin-right: 5px;"></div> Zone sure <br>';
-  div.innerHTML += '<div style="background-color: #ae7264; width: 20px; height: 20px; display: inline-block; margin-right: 5px;"></div> Zon dangereuse <br>';
-
-  return div;
-};
-
-legendIndividu.addTo(map);
-
-
 // MASQUER LA TRAJECTOIRE 
-document.getElementById('id_dilemSelect').addEventListener('change', function() {
+document.getElementById('id_dilemSelect').addEventListener('change', function () {
   var selectedValue = this.value;
   var trajectoireSection = document.getElementById('individu_section');
   var fukushimaDataSection = document.getElementById('fukushima_section');
@@ -441,18 +394,18 @@ document.getElementById('id_dilemSelect').addEventListener('change', function() 
   // Si une option est sélectionnée, afficher la section de trajectoire et la couche Fukushima
   // Sinon, les masquer
   if (selectedValue !== '') {
-      trajectoireSection.style.display = 'block';
-      fukushimaDataSection.style.display = 'block';
+    trajectoireSection.style.display = 'block';
+    fukushimaDataSection.style.display = 'block';
   } else {
-      trajectoireSection.style.display = 'none';
-      fukushimaDataSection.style.display = 'none';
-      // Masquer la trajectoire
-      if (polyline) {
-        map.removeLayer(polyline);
-      }
-      // Masquer la couche Fukushima
-      if (map.hasLayer(fukushimaLayer)) {
-        map.removeLayer(fukushimaLayer);
-      }
+    trajectoireSection.style.display = 'none';
+    fukushimaDataSection.style.display = 'none';
+    // Masquer la trajectoire
+    if (polyline) {
+      map.removeLayer(polyline);
+    }
+    // Masquer la couche Fukushima
+    if (map.hasLayer(fukushimaLayer)) {
+      map.removeLayer(fukushimaLayer);
+    }
   }
 });

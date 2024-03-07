@@ -113,7 +113,13 @@ body {
   font-family: 'Allerta Stencile', sans-serif;
   margin: 0;
   padding-top: 70px;
-  background-color: #EEE9E4;
+  background-image:url('img/ecran.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
+  opacity: 0.9;
 }
 
 html,
@@ -124,7 +130,6 @@ body {
 }
 
 .custom-map-container {
-  position: relative;
   height: calc(100vh - 80px);
 }
 
@@ -234,7 +239,6 @@ select {
 
 /* Style pour la checkbox */
 #showSecondMapCheckbox {
-  display: block;
   margin-top: 10px;
   /* Espacement pour séparer la checkbox des cartes */
 }
@@ -244,11 +248,6 @@ select {
   display: none;
   right: 0;
   z-index: 1000;
-}
-
-#map-container-wrapper {
-  position: relative;
-  /* Assurez-vous que le conteneur est positionné de manière relative */
 }
 
 #mapContainer1 {
@@ -418,3 +417,14 @@ select {
   color:#002530;
   font-size:medium;
 }
+
+/* TEXTE EN SURBRIANCE TEST*/
+.highlight-text {
+  display: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ajoute une ombre de 2px vers la droite et vers le bas, avec un flou de 4px */
+  border-bottom: 2px solid transparent; /* Ajoute une bordure inférieure transparente */
+  transition: border-bottom 0.3s; /* Ajoute une transition fluide */
+}
+
+h1:hover .highlight-text {
+  display: inline;}
