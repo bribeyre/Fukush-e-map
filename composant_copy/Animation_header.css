@@ -1,0 +1,81 @@
+.card-containers {
+  flex: 120px;
+  margin:30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.card-container2 .card2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center; /* Aligne les centres verticalement */
+  justify-content: space-around; /* Répartit les cartes horizontalement */
+  font-weight: bold;
+  position: relative;
+  width: 100%;
+}
+
+.card-container2 .card2 a {
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: black;
+  display: block;
+  transition: 0.25s ease;
+  z-index: 2;
+}
+
+.card-container2 .card2 a:hover {
+  transform: translate(-3px, -3px);
+  border-color: #c76e6c;
+}
+
+.card-container2 .card2 a:hover .card--display2 {
+  display: none;
+}
+
+.card-container2 .card2 a:hover .card--hover2 {
+  display: block;
+}
+
+.card-container2 .card2 a .card--display2 i {
+  font-size: 60px;
+  margin-top: 100px;
+}
+
+.card-container2 .card2 a .card--display2 h2 {
+  margin: 10px 0 0;
+  width: 100%;
+  height: auto; /* Pour permettre à la hauteur de s'ajuster automatiquement à la taille du contenu */
+  overflow: hidden; /* Pour cacher tout contenu dépassant de la carte */
+  word-wrap: break-word; /* Pour forcer le texte à se casser en fin de ligne si nécessaire */
+
+}
+
+.card-container2 .card2 a .card--hover2 {
+  display: none;
+}
+
+.card-container2 .card2 a .card--hover2 h5 {
+  margin: 10px 0;
+}
+
+.card-container2 .card2 a .card--hover2 p {
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+.card-container2 .card2 a .card--hover2 p.link {
+  margin: 20px 0 0;
+  font-weight: bold;
+  color: #c76e6c;
+}
+
+
+.card-container2 .card2.card--dark2 a {
+  color: white;
+  background-color: black;
+  border-color: black;
+}
+

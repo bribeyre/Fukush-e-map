@@ -1,42 +1,58 @@
 header {
-    margin-bottom: 20px; /* Ajoute un espace de 20 pixels en bas de l'en-tête */
-    background-image: url("img/banniére3.png");
-    background-size: cover; /* Redimensionne l'image pour couvrir l'en-tête */
-    background-position: center; /* Centre l'image dans l'en-tête */
-    background-repeat: no-repeat; /* Empêche la répétition de l'image */
-    z-index: 1000; /* Définir un z-index élevé pour maintenir le header au-dessus */
+  margin-bottom: 20px;
+  /* Ajoute un espace de 20 pixels en bas de l'en-tête */
+  background-image: url("img/banniére3.png");
+  background-size: cover;
+  /* Redimensionne l'image pour couvrir l'en-tête */
+  background-position: center;
+  /* Centre l'image dans l'en-tête */
+  background-repeat: no-repeat;
+  /* Empêche la répétition de l'image */
+  z-index: 1000;
+  /* Définir un z-index élevé pour maintenir le header au-dessus */
 
-  }
-  .leaflet-sidebar-header {
-    background-color: #5A7B85;
-    opacity: 0.9;
-    margin-bottom: 10px; /* Ajoute un espace de 10 pixels en bas de l'en-tête */
-    max-height: 60px; /* Limite la hauteur de l'en-tête */
-  }
-   
+}
+
+.leaflet-sidebar-header {
+  background-color: #5A7B85;
+  opacity: 0.9;
+  padding: 10px;
+  /* Ajoute un espacement intérieur de 10 pixels */
+  margin-bottom: 10px;
+  /* Ajoute un espace de 10 pixels en bas de l'en-tête */
+  max-height: 60px;
+  /* Limite la hauteur de l'en-tête */
+}
+
 /* Ajuster les marges et paddings des éléments internes */
 header .navbar-brand img {
-  width: 65px; /* Réduire la taille du logo */
+  width: 65px;
+  /* Réduire la taille du logo */
   height: 65px;
-  margin-right:2px; /* Ajouter un espace entre le logo et le texte */
+  margin-right: 2px;
+  /* Ajouter un espace entre le logo et le texte */
 }
+
 header .navbar-brand {
-  font-size : 1.80rem;
+  font-size: 1.80rem;
   margin-right: 20px;
   color: #FEFCFC;
   margin-right: 20px;
 }
 
 header .col-4.d-flex.justify-content-end.align-items-center {
-  padding-top: 10px; /* Ajouter un espace au-dessus du bouton Source */
-  padding-bottom: 10px; /* Ajouter un espace en dessous du bouton Source */
+  padding-top: 10px;
+  /* Ajouter un espace au-dessus du bouton Source */
+  padding-bottom: 10px;
+  /* Ajouter un espace en dessous du bouton Source */
 }
+
 .custom-btn {
   background-color: #EEE9E4;
   color: #B32A2A;
   border-color: black;
   border-radius: 21px;
-  
+
   /* Ajoutez d'autres styles personnalisés selon vos besoins */
 }
 
@@ -46,110 +62,369 @@ header .col-4.d-flex.justify-content-end.align-items-center {
   border-color: #EEE9E4;
 }
 
-
-.container{
-    margin-right: auto;
-    margin-left: auto;
-    position: relative;
-    padding-top: 50px;
-}
-
-#contexte{
-    margin-right: auto;
-    margin-left: auto;
-    background-color: #2C7185; /* Background color */
-    position: relative;
-    border-radius: 10px; /* Vous pouvez ajuster la valeur en pixels selon le degré de courbure souhaité */
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-.content {
-    padding: 20px;
-  }
-  @font-face {
-    font-family: 'Allerta Stencile';
-    src: url('font/AllertaStencil-Regular.ttf') format('truetype');
-}
-body {
-    font-family: 'Allerta Stencile', sans-serif;
-    margin:0;
-    padding-top: 70px;
-}
-html,body{
-  width:100%;
-  margin:0; 
-  padding:0;
-}
-.custom-map-container {
+.container {
+  margin-right: auto;
+  margin-left: auto;
   position: relative;
-  height: calc(100vh - 80px);
-}
-#map {
-  height: 100%; /* Hauteur de la carte à 100% du conteneur */
-  margin-top: 30px;
-}
-#sidebar {
-  z-index: 999; /* Définir un z-index légèrement inférieur pour la sidebar */
-  font-family: 'Allerta Stencile', sans-serif;
-  color:black;
-  
-}
-.leaflet-sidebar-header{
-  background-color:#5A7B85 ;
-  opacity: 90%;
-}
-.leaflet-sidebar-tabs{
-  background-color: #5A7B85;
-  
-}
-.leaflet-sidebar-content{
-  background-color: #D6D6D6;
-  opacity: 90%;
-  width: 75%; /* Largeur fixe */
-  max-width: 350px; /* Largeur maximale fixe */
+  padding-top: 50px;
 }
 
-
-/* style du titre du contexte */
-.display-5.fst-italic{
-  color: #FEFCFC;
-}
-/* style du texte du contexte */
-.lead{
-  color: #FEFCFC;
+#contexte {
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #2C7185;
+  /* Background color */
+  position: relative;
+  border-radius: 10px;
+  /* Vous pouvez ajuster la valeur en pixels selon le degré de courbure souhaité */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  color: white;
 }
 
 /* Style pour le conteneur risque réel vs risque perçu*/
 .col-md-12:nth-child(2) .border {
-  background-color: #5A7B85; /* Changer la couleur de fond  */
-  color: #FEFCFC; /* Changer la couleur des textes  */
+  background-color: #5A7B85;
+  /* Changer la couleur de fond  */
+  color: #FEFCFC;
+  /* Changer la couleur des textes  */
 }
 
 /* Style pour le conteneur risque réel vs risque perçu*/
 .col-md-12:nth-child(3) .border {
-  background-color: #5A9CB1; /* Changer la couleur de fond  */
-  color: #FEFCFC; /* Changer la couleur des textes  */
+  background-color: #5A9CB1;
+  /* Changer la couleur de fond  */
+  color: #FEFCFC;
+  /* Changer la couleur des textes  */
 }
-/* Style des éléments de la liste */
-ul li {
-  color: white; /* Change la couleur du texte des éléments de la liste */
+
+.content {
+  padding: 20px;
 }
+
+@font-face {
+  font-family: 'Allerta Stencile';
+  src: url('font/AllertaStencil-Regular.ttf') format('truetype');
+}
+
+body {
+  font-family: 'Allerta Stencile', sans-serif;
+  margin: 0;
+  padding-top: 70px;
+  background-image:url('img/ecran.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
+  opacity: 0.9;
+}
+
+html,
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.custom-map-container {
+  height: calc(100vh - 80px);
+}
+
 
 .border-bottom {
   border-bottom: 0px solid #dee2e6 !important;
 }
 
-@media (min-width: 768px) {
-  .leaflet-sidebar.leaflet-touch {
-    border: 0px solid rgba(0, 0, 0, 0.2);
-    border-right-width: 0px;
-    border-right-style: solid;
-    border-right-color: rgba(0, 0, 0, 0.2);
-  }
+/* STYLE du sidepanel */
+
+.sidepanel {
+  position: relative;
+  z-index: 999;
+  /* Définir un z-index inférieur pour le sidepanel */
+  font-family: 'Allerta Stencile', sans-serif;
 }
-.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
-  border: 0px solid rgba(0,0,0,0.2);
-  background-clip: padding-box;
+
+.header h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.header a {
+  font-size: 16px;
+  color: #D6D6D6;
+  text-decoration: none;
+  margin-left: 24px;
+}
+
+.header a:hover {
+  color: #2C7185;
+  text-decoration: underline;
+}
+
+.header a span {
+  margin-left: 4px;
+}
+
+.header a svg {
+  vertical-align: middle;
+}
+
+.sidepanel-content {
+  font-size: 1rem;
+  text-decoration: none;
+  font-size: 1rem;
+  color: black;
+  transition: color 0.3s ease-in;
+  font-family: 'Allerta Stencile', sans-serif;
+}
+
+.sidepanel-content h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.sidepanel-content a:hover {
+  color: #2C7185;
+  text-decoration: underline;
+}
+
+label {
+  font-size: small;
+  /* Ajustez la taille du texte du label */
+}
+
+select {
+  font-size: small;
+}
+/* Style pour positionner les labels en dessous */
+#tickmarks {
+  display: flex;
+  padding-top: 10px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tickmarks-below {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  /* Pour centrer les tickmarks horizontalement */
+  transform: translateY(100%);
+  /* Pour les déplacer en bas */
+}
+
+#toggleLayer {
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#toggleLayer:focus {
+  outline: none;
+  /* Supprime la bordure de focus */
+}
+
+#id_dilemSelect {
+  /* Add scrollbar for overflow */
+  overflow-y: auto;
+}
+
+/* Style pour la checkbox */
+#showSecondMapCheckbox {
+  margin-top: 10px;
+  /* Espacement pour séparer la checkbox des cartes */
+}
+
+/* Heatmap */
+#mapContainer2 {
+  display: none;
+  right: 0;
+  z-index: 1000;
+}
+
+#mapContainer1 {
+  position: absolute;
+  /* Position absolue pour permettre la superposition */
+  left: 0;
+  /* Aligner la gauche de la carte */
+  width: 100%;
+  /* Utilisez la moitié de la largeur parente */
+  height: calc(100vh - 80px);
+  /* Hauteur de la carte */
+  z-index: 1;
+  /* Assurez-vous que la première carte est en dessous */
+  margin-top: 30px;
+}
+
+
+#mapContainer2 {
+  position: absolute;
+  /* Position absolue pour permettre la superposition */
+  right: 0;
+  /* Aligner la droite de la carte */
+  width: 35%;
+  /* Utilisez la moitié de la largeur parente */
+  height: calc(100vh - 80px);
+  /* Hauteur de la carte */
+  z-index: 2;
+  /* Assurez-vous que la deuxième carte est au-dessus */
+  margin-top: 30px;
+}
+
+
+/* HEATMAP LEGEND */
+.heatmap-legend {
+  position: absolute;
+  bottom: 4.5%;
+  /* Position en bas à 5% de la hauteur de la carte */
+  right: 1%;
+  /* Position à droite à 5% de la largeur de la carte */
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  /* Aligner les éléments sur la même ligne */
+  justify-content: space-between;
+  /* Répartir les éléments uniformément */
+  opacity: 90%;
+}
+
+/* Style pour le dégradé de couleurs */
+.heatmap-gradient {
+  width: 20px;
+  /* Largeur du rectangle vertical */
+  height: 77px;
+  /* Hauteur du rectangle vertical */
+  background: linear-gradient(to bottom, blue, lime, yellow, red);
+  border-radius: 5px;
+  margin-right: 10px;
+  /* Ajustement de la marge droite */
+}
+
+.legend-label-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style pour les étiquettes de légende */
+.legend-label {
+  margin-left: 5px;
+  /* Ajustez la marge selon vos besoins */
+}
+
+
+/* BUtton prefecture */
+
+.style_boutons_divisions_adm {
+  background-color: transparent; /* Supprime le fond gris */
+  border: none; /* Supprime les bordures */
+  cursor: pointer; /* Change le curseur au survol */
+  color: #333; /* Couleur du texte */
+  font-size: small; /* Taille de la police */
+  padding: 0; /* Supprimer le rembourrage */
+  margin: 0; /* Supprimer la marge */
+}
+
+.style_boutons_divisions_adm:hover {
+  color: #666; /* Couleur du texte au survol */
+}
+
+/* style TOGLLE */
+#toggleLayer1, #toggleLayer2 {
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+#toggleLayer1:focus, #toggleLayer2:focus {
+  outline: none; /* Supprime la bordure de focus */
+}
+/* Styles pour la légende personnalisée */
+.legendIndiv {
+  position: absolute;
+  bottom: 10px; /* Ajustez la position verticale selon vos besoins */
+  right: 40px; /* Ajustez la position horizontale selon vos besoins */
+  background-color: white;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  z-index: 1000; /* Assurez-vous que la légende est au-dessus des autres éléments de la carte */
+}
+
+
+/* Ajouter un contour blanc autour de la légende */
+.legendGroupe {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ajouter une ombre si désiré */
+}
+
+/* page d'accueil */
+
+.contexte_bis {
+  width: 1100px; /* Largeur du rectangle */
+  height: 350px; /* Hauteur du rectangle */
+  background-color: #2C7185; /* Couleur de fond */
+  border: 2px solid #2C7185; /* Bordure du rectangle */
+  margin-top: 50px; /* Marge au-dessus du rectangle */
+  margin-left: auto; /* Centrer horizontalement */
+  margin-right: auto; /* Centrer horizontalement */
+  border-radius: 20px; /* Rayon de courbure des coins */
+  padding: 30px; /* Marges à l'intérieur du rectangle */
+  color: white; /* Couleur du texte */
+}
+
+.trajectoire {
+  width: 1100px; /* Largeur du rectangle */
+  height: 350px; /* Hauteur du rectangle */
+  background-color: #5A9CB1; /* Couleur de fond */
+  border: 2px solid #5A9CB1; /* Bordure du rectangle */
+  margin-top: 50px; /* Marge au-dessus du rectangle */
+  margin-left: auto; /* Centrer horizontalement */
+  margin-right: auto; /* Centrer horizontalement */
+  border-radius: 20px; /* Rayon de courbure des coins */
+  padding: 30px; /* Marges à l'intérieur du rectangle */
+  color: white; /* Couleur du texte */
+}
+
+.risque {
+  width: 1100px; /* Largeur du rectangle */
+  height: 350px; /* Hauteur du rectangle */
+  background-color: #5A7B85; /* Couleur de fond */
+  border: 2px solid #5A7B85; /* Bordure du rectangle */
+  margin-top: 50px; /* Marge au-dessus du rectangle */
+  margin-left: auto; /* Centrer horizontalement */
+  margin-right: auto; /* Centrer horizontalement */
+  border-radius: 20px; /* Rayon de courbure des coins */
+  padding: 30px; /* Marges à l'intérieur du rectangle */
+  color: white; /* Couleur du texte */
+}
+#titrepopup{
+  color:#002530;
+  font-size:medium;
+}
+
+/* TEXTE EN SURBRIANCE TEST*/
+.highlight-text {
+  display: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ajoute une ombre de 2px vers la droite et vers le bas, avec un flou de 4px */
+  border-bottom: 2px solid transparent; /* Ajoute une bordure inférieure transparente */
+  transition: border-bottom 0.3s; /* Ajoute une transition fluide */
+}
+
+h1:hover .highlight-text {
+  display: inline;}
