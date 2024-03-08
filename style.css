@@ -113,13 +113,13 @@ body {
   font-family: 'Allerta Stencile', sans-serif;
   margin: 0;
   padding-top: 70px;
-  background-image:url('img/ecran.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-blend-mode: multiply;
   opacity: 0.9;
+  overflow: hidden;
 }
 
 html,
@@ -130,7 +130,7 @@ body {
 }
 
 .custom-map-container {
-  height: calc(100vh - 80px);
+  height: calc(100vh - 20px);
 }
 
 
@@ -257,11 +257,12 @@ select {
   /* Aligner la gauche de la carte */
   width: 100%;
   /* Utilisez la moitié de la largeur parente */
-  height: calc(100vh - 80px);
+  height: calc(100vh - 83px);
   /* Hauteur de la carte */
   z-index: 1;
   /* Assurez-vous que la première carte est en dessous */
-  margin-top: 30px;
+  margin-top: 36px;
+  overflow: hidden;
 }
 
 

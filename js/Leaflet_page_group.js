@@ -2,7 +2,7 @@ let map = L.map('mapContainer1', {
   zoomControl: false
 }).setView([36.2048, 138.2529], 5);
 L.control.scale({
-  position: 'bottomleft'
+  position: 'topright'
 }).addTo(map);
 L.control.zoom({
   position: 'topright'
@@ -14,7 +14,6 @@ const sidepanelLeft = L.control.sidepanel('mySidepanelLeft', {
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
-
 
 // PLEIN ECRAN
 // Création d'un contrôle personnalisé pour le bouton de plein écran

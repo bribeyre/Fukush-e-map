@@ -99,3 +99,18 @@ p{
   background-size: cover; /* Ajuster la taille de l'image pour couvrir toute la carte */
   background-position: center; /* Centrer l'image dans la carte */
 }
+@media (max-width: 768px) {
+  /* Pour les écrans jusqu'à 768px de large */
+
+  .card {
+    width: calc(50% - 20px); /* Utilisez 50% de la largeur moins l'espace de marge */
+  }
+}
+
+@media (max-width: 576px) {
+  /* Pour les écrans jusqu'à 576px de large */
+
+  .card {
+    width: calc(100% - 20px); /* Utilisez 100% de la largeur moins l'espace de marge */
+  }
+}

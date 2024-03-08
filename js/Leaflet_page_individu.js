@@ -5,9 +5,8 @@ L.control.scale({
   position: 'topright'
 }).addTo(map);
 L.control.zoom({
-  position: 'bottomright'
+  position: 'topright'
 }).addTo(map);
-
 const sidepanelLeft = L.control.sidepanel('mySidepanelLeft', {
   tabsPosition: 'left',
   startTab: 'tab-1'
@@ -47,7 +46,7 @@ var fullscreenControl = L.Control.extend({
 });
 
 // Ajout du contrôle personnalisé à la carte Leaflet
-map.addControl(new fullscreenControl({ position: 'bottomright' }));
+map.addControl(new fullscreenControl({ position: 'topright' }));
 
 // Fonction pour mettre la carte en plein écran
 function toggleFullScreen() {

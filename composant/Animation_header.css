@@ -79,3 +79,25 @@
   border-color: black;
 }
 
+.card-container .card.card--dark a .card--hover .link {
+  color: #fde74c;
+  
+}
+
+.person-icon {
+  font-size: 24px; /* Adjust the size of the icon */
+  color: #333; /* Change the color of the icon */
+  height: 50px;
+  width: 50px;
+}
+
+p{
+  font-size:0.8em;
+  text-align: justify;
+}
+.card {
+  position: relative; /* Permet de positionner correctement le contenu au-dessus de l'image de fond */
+  background-color: #9fc6da;
+  background-size: cover; /* Ajuster la taille de l'image pour couvrir toute la carte */
+  background-position: center; /* Centrer l'image dans la carte */
+}
