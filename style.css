@@ -109,16 +109,16 @@ header .col-4.d-flex.justify-content-end.align-items-center {
   src: url('font/AllertaStencil-Regular.ttf') format('truetype');
 }
 
-body {
+body{
   font-family: 'Allerta Stencile', sans-serif;
   margin: 0;
   padding-top: 70px;
   background-size: cover;
   background-position: center;
+  background-color:#9ec3ce;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-blend-mode: multiply;
-  opacity: 0.9;
   overflow: hidden;
 }
 

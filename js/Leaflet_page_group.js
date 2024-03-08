@@ -1,11 +1,11 @@
 let map = L.map('mapContainer1', {
   zoomControl: false
 }).setView([36.2048, 138.2529], 5);
-L.control.scale({
-  position: 'topright'
-}).addTo(map);
 L.control.zoom({
   position: 'topright'
+}).addTo(map);
+L.control.scale({
+  position: 'bottomleft'
 }).addTo(map);
 const sidepanelLeft = L.control.sidepanel('mySidepanelLeft', {
   tabsPosition: 'left',
@@ -13,8 +13,7 @@ const sidepanelLeft = L.control.sidepanel('mySidepanelLeft', {
 }).addTo(map);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
+}).addTo(map); 
 // PLEIN ECRAN
 // Création d'un contrôle personnalisé pour le bouton de plein écran
 var fullscreenControl = L.Control.extend({
@@ -46,7 +45,7 @@ var fullscreenControl = L.Control.extend({
 });
 
 // Ajout du contrôle personnalisé à la carte Leaflet
-map.addControl(new fullscreenControl({ position: 'topright' }));
+map.addControl(new fullscreenControl({ position: 'topleft' }));
 
 // Fonction pour mettre la carte en plein écran
 function toggleFullScreen() {
@@ -189,7 +188,7 @@ function fetchHeatmapData(map2) {
       });
       // Créer la heatmap avec les données et l'ajouter à map2
       var heat = L.heatLayer(heatData, {
-        radius: 10,
+        radius: 12,
         gradient: {
           0.25: 'blue',   // Low values
           0.5: 'lime',    // Moderate values
