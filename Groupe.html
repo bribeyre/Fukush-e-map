@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perception du risques</title>
+  <title>Perception du groupe</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!-- Leaflet CSS -->
@@ -24,68 +24,65 @@
   <!-- Header -->
   <div id="body2">
     <div class="container">
-        <header id="header2" class="border-bottom lh-1 py-1 fixed-top">
-            <div class="row flex-nowrap justify-content-between align-items-center">
-                <div class="col-6 pt-1">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="img/logo.png" alt="Bootstrap" width=100% height=100%>
-                        <a class="navbar-brand" href="index.html">Fukush-e-map</a>
-                    </a>
-                </div>
-                <div class="col-6">
-                    <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-                        <div class="card-container2">
-                            <div class="card2">
-                                <a id="lienImage1" href="index.html">
-                                    <div class="card--display2"
-                                        style="display: flex; align-items: center; justify-content: center;">
-                                        <img id="imageChanger1" src="img/Centrale_avant.png"class="person-icon">
-                                    </div>
-                                </a>
-                                <div class="card--border2"></div>
-                            </div>
-                        </div>
-
-                        <div class="card-container2">
-                            <div class="card2">
-                                <a id="lienImage2" href="Individue.html">
-                                    <div class="card--display2"
-                                        style="display: flex; align-items: center; justify-content: center;">
-                                        <img id="imageChanger2" src="img/Utilisateur_avant.png"class="person-icon">
-                                    </div>
-                                </a>
-                                <div class="card--border2"></div>
-                            </div>
-                        </div>
-
-                        <div class="card-container2">
-                            <div class="card2">
-                                <a id="lienImage3" href="Groupe.html">
-                                    <div class="card--display2" style="display: flex; align-items: center; justify-content: center;">
-                                        <img id="imageChanger3" src="img/Groupe_aprés.png" alt="Groupe" class="person-icon">
-                                    </div>
-                                </a>
-                                <div class="card--border2"></div>
-                            </div>
-                        </div>
-
-                        <div class="card-container2" >
-                            <div class="card2" >
-                                <a id="lienImage4" href="Source.html">
-                                    <div class="card--display2"
-                                        style="display: flex; align-items: center; justify-content: center;">
-                                        <img id="imageChanger4" src="img/info_avant.png" alt="Info" class="person-icon">
-                                    </div>
-                                </a>
-                                <div class="card--border2"></div>
-                            </div>
-                        </div>
+      <header id="header2" class="border-bottom lh-1 py-1 fixed-top">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col-6 pt-1">
+            <a class="navbar-brand" href="index.html">
+              <img src="img/logo.png" alt="Bootstrap" width=100% height=100%>
+              <a class="navbar-brand" href="index.html">Fukush-e-map</a>
+            </a>
+          </div>
+          <div class="col-6">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+              <div class="card-container2">
+                <div class="card2">
+                  <a id="lienImage1" href="index.html">
+                    <div class="card--display2" style="display: flex; align-items: center; justify-content: center;">
+                      <img id="imageChanger1" src="img/Centrale_avant.png" class="person-icon">
                     </div>
+                  </a>
+                  <div class="card--border2"></div>
                 </div>
+              </div>
+
+              <div class="card-container2">
+                <div class="card2">
+                  <a id="lienImage2" href="Individue.html">
+                    <div class="card--display2" style="display: flex; align-items: center; justify-content: center;">
+                      <img id="imageChanger2" src="img/Utilisateur_avant.png" class="person-icon">
+                    </div>
+                  </a>
+                  <div class="card--border2"></div>
+                </div>
+              </div>
+
+              <div class="card-container2">
+                <div class="card2">
+                  <a id="lienImage3" href="Groupe.html">
+                    <div class="card--display2" style="display: flex; align-items: center; justify-content: center;">
+                      <img id="imageChanger3" src="img/Groupe_aprés.png" alt="Groupe" class="person-icon">
+                    </div>
+                  </a>
+                  <div class="card--border2"></div>
+                </div>
+              </div>
+
+              <div class="card-container2">
+                <div class="card2">
+                  <a id="lienImage4" href="Source.html">
+                    <div class="card--display2" style="display: flex; align-items: center; justify-content: center;">
+                      <img id="imageChanger4" src="img/info_avant.png" alt="Info" class="person-icon">
+                    </div>
+                  </a>
+                  <div class="card--border2"></div>
+                </div>
+              </div>
             </div>
-        </header>
+          </div>
+        </div>
+      </header>
     </div>
-</div>
+  </div>
 
   <div id="map-container-wrapper" class="custom-map-container">
     <div id="mapContainer1" class="map">
@@ -113,42 +110,54 @@
 
                 <div>
                   <h6>Choix du groupe (statut de déplacement)</h6>
-                  <select id="options" name="options">
-                    <option value="option1">déplacé</option>
-                    <option value="option2">résident</option>
-                    <option value="option3">retourné</option>
-                    <option value="option4">déplacé forcé</option>
+                  <select id="options_individu" name="options_individu">
+                    <option value="all">Tous les individus</option>
+                    <option value="Déplacé">Déplacé</option>
+                    <option value="Résident">Résident</option>
+                    <option value="Retourné">Retourné</option>
+                    <option value="Déplacé forcé (2016)">Déplacé forcé</option>
                   </select>
                 </div>
                 <hr>
                 <div>
-                  <h5>Echelle de la Carte</h5>
-                  <input type="radio" id="option1" name="options" value="japan" onclick="zoomToJapan()">
+                  <h6>Echelle de la Carte</h6>
+                  <input type="radio" id="option1" name="options_couche" value="japan" checked>
                   <label for="option1">Japon</label><br>
-                  <input type="radio" id="option2" name="options" value="fukushima" onclick="zoomToFukushima()">
+                  <input type="radio" id="option2" name="options_couche" value="fukushima">
                   <label for="option2">Fukushima</label><br>
                 </div>
                 <hr>
                 <div>
                   <h6>Catégorie pour l'agrégation des perceptions</h6>
-                  <input type="radio" id="radio1" name="radio" value="Zones jugées sures">
+                  <input type="radio" id="radio1" name="radio" value="Zones jugées sures" checked>
                   <label for="radio1">Zones jugées sures</label><br>
                   <input type="radio" id="radio2" name="radio" value="Zones jugées dangereuses">
                   <label for="radio2">Zones jugées dangereuses</label><br>
                   <input type="radio" id="radio3" name="radio" value="Zones intersticielles">
                   <label for="radio3">Zones intersticielles</label><br>
+
                 </div>
                 <hr>
                 <div>
-                  <label for="slider">Choisir une année pour la perceptions</label><br>
-                  <input type="range" id="slider" name="slider" min="0" max="100" value="50">
+                  <h6>Choix de l'années</h6><br>
+                  <input type="range" id="slider" name="slider" min="2013" max="2017" value="2015" step="2"
+                    list="tickmarks">
+                  <datalist id="tickmarks">
+                    <option value=2013>2013</option>
+                    <option value=2015>2015</option>
+                    <option value=2017>2017</option>
+                  </datalist>
                 </div>
                 <hr>
                 <div>
-                <h6>Carte de mesure officielle diffusée par le gouvernement daté du 5 février 2024</h6>
-                <input type="checkbox"id="showSecondMapCheckbox">
-                <label for="showSecondMapCheckbox">Afficher la heatmap</label><br>
-              </div>
+                  <button id="searchButton">Recherche</button>
+                </div>
+                <hr>
+                <div>
+                  <h6>Carte de mesure officielle diffusée par le gouvernement daté du 5 février 2024</h6>
+                  <input type="checkbox" id="showSecondMapCheckbox">
+                  <label for="showSecondMapCheckbox">Afficher la heatmap</label><br>
+                </div>
               </div>
             </div>
           </div>
@@ -157,22 +166,23 @@
           <button class="sidepanel-toggle-button" type="button" aria-label="toggle side panel"></button>
         </div>
       </div>
+      <div id="legend_groupe"style="display: none;"></div>
     </div>
-    <div id="mapContainer2" class="map">
-      <div class="heatmap-legend">
-        <!-- Dégradé de couleurs -->
-        <div class="heatmap-gradient"></div>
-        <!-- Dégradé de couleurs -->
-        <hr>
-        <div class="legend-label-container">
-          <!-- Étiquettes de légende -->
-          <div class="legend-label">Faible</div>
-          <div class="legend-label">Modéré</div>
-          <div class="legend-label">Élevé</div>
-          <div class="legend-label">Très élevé</div>
-        </div>
+  <div id="mapContainer2" class="map">
+    <div class="heatmap-legend">
+      <!-- Dégradé de couleurs -->
+      <div class="heatmap-gradient"></div>
+      <!-- Dégradé de couleurs -->
+      <hr>
+      <div class="legend-label-container">
+        <!-- Étiquettes de légende -->
+        <div class="legend-label">Faible</div>
+        <div class="legend-label">Modéré</div>
+        <div class="legend-label">Élevé</div>
+        <div class="legend-label">Très élevé</div>
       </div>
     </div>
+  </div>
   </div>
   <!-- Footer -->
   <!-- Bootstrap JS -->
@@ -186,8 +196,6 @@
   <script src="dist_heatmap/leaflet-heat.js"></script>
   <!-- Your Map Initialization Script -->
   <script src="js/Jquery.js"></script>
-  
-  <script src="js/bouton.js"></script>
   <script src="js/Leaflet_page_group.js"></script>
 </body>
 

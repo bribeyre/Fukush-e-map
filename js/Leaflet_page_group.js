@@ -2,12 +2,11 @@ let map = L.map('mapContainer1', {
   zoomControl: false
 }).setView([36.2048, 138.2529], 5);
 L.control.scale({
-  position: 'topright'
+  position: 'bottomleft'
 }).addTo(map);
 L.control.zoom({
-  position: 'bottomright'
+  position: 'topright'
 }).addTo(map);
-
 const sidepanelLeft = L.control.sidepanel('mySidepanelLeft', {
   tabsPosition: 'left',
   startTab: 'tab-1'
@@ -48,7 +47,7 @@ var fullscreenControl = L.Control.extend({
 });
 
 // Ajout du contrôle personnalisé à la carte Leaflet
-map.addControl(new fullscreenControl({ position: 'bottomright' }));
+map.addControl(new fullscreenControl({ position: 'topright' }));
 
 // Fonction pour mettre la carte en plein écran
 function toggleFullScreen() {
@@ -234,4 +233,323 @@ document.getElementById('showSecondMapCheckbox').addEventListener('change', func
 
 // FIN AJOUT HEAMAP
 
-// AJOUT D'UNE LEGEND 
+// AJOUT DES PERCEPTION
+
+
+// Fonction pour filtrer les données en fonction de la catégorie sélectionnée
+function loadConsensusFukushima() {
+  var selectedRadio = document.querySelector('input[name="radio"]:checked');
+  var selectedOption = document.getElementById('options_individu').value;
+  var selectedYear = document.getElementById('slider').value;
+  var zoneValue;
+
+  // Vérifier si une catégorie est sélectionnée
+  if (selectedRadio) {
+    var selectedCategory = selectedRadio.value;
+
+    // Déterminer la valeur de zone en fonction de la catégorie sélectionnée
+    switch (selectedCategory) {
+      case 'Zones jugées sûres':
+        zoneValue = 1;
+        break;
+      case 'Zones jugées dangereuses':
+        zoneValue = 2;
+        break;
+      case 'Zones intersticielles':
+        zoneValue = 3;
+        break;
+      default:
+        zoneValue = 1; // Valeur par défaut
+        break;
+    }
+
+    // Utiliser une échelle de couleur continue
+    function getColor(normalizedValue, zoneValue) {
+      if (zoneValue === 1) {
+        return normalizedValue === 0 ? '#fff' :
+          normalizedValue < 0.2 ? '#f7fcfd' :
+            normalizedValue < 0.3 ? '#e5f5f9' :
+              normalizedValue < 0.4 ? '#ccece6' :
+                normalizedValue < 0.5 ? '#99d8c9' :
+                  normalizedValue < 0.6 ? '#66c2a4' :
+                    normalizedValue < 0.7 ? '#41ae76' :
+                      normalizedValue < 0.8 ? '#238b45' :
+                        normalizedValue < 0.9 ? '#006d2c' :
+                          normalizedValue <= 1 ? '#00441b' :
+                            '#2171b5';
+      } else if (zoneValue === 2) {
+        return normalizedValue === 0 ? '#fff' :
+          normalizedValue < 0.2 ? '#fff5f0' :
+            normalizedValue < 0.3 ? '#fee0d2' :
+              normalizedValue < 0.4 ? '#fcbba1' :
+                normalizedValue < 0.5 ? '#fc9272' :
+                  normalizedValue < 0.6 ? '#fb6a4a' :
+                    normalizedValue < 0.7 ? '#ef3b2c' :
+                      normalizedValue < 0.8 ? '#cb181d' :
+                        normalizedValue < 0.9 ? '#a50f15' :
+                          normalizedValue <= 1 ? '#67000d' :
+                            '#2171b5';
+      } else {
+        return d3.interpolateReds(normalizedValue);
+      }
+    }
+
+    // Construire l'URL avec les paramètres de requête annee, zone et option
+    var url;
+    if (selectedOption === 'all' || selectedOption === null) {
+      url = 'http://localhost:5000/fukushima?annee=' + selectedYear + '&zone=' + zoneValue;
+    } else {
+      url = 'http://localhost:5000/fukushima?annee=' + selectedYear + '&zone=' + zoneValue + '&options=' + selectedOption;
+    }
+    // Supprimer la couche existante de la carte
+    map.eachLayer(function (layer) {
+      if (layer instanceof L.GeoJSON) {
+        map.removeLayer(layer);
+      }
+    });
+
+    fetch(url, {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        var minCount = data.min_count;
+        var maxCount = data.max_count;
+
+        L.geoJson(data.geojson, {
+          style: function (feature) {
+            var id_dilem_counts = feature.properties.id_dilem_counts;
+            console.log("id_dilem_counts:", id_dilem_counts);
+            console.log("minCount:", minCount);
+            console.log("maxCount:", maxCount);
+            // Normaliser la valeur entre 0 et 1
+            var normalizedValue = (id_dilem_counts - minCount) / (maxCount - minCount);
+            console.log("normalizedValue:", normalizedValue);
+
+            // Définir la couleur en fonction du count
+            var color = getColor(normalizedValue, zoneValue);
+            console.log("color:", color);
+            return {
+              fillColor: color,
+              weight: 0,
+              opacity: 1,
+              color: 'white',
+              fillOpacity: 1
+            };
+          }
+        }).addTo(map);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  } else {
+    console.error('No radio button selected');
+  }
+}
+
+// Fonction pour charger la couche consensus_japon
+function loadConsensusJapon() {
+  var selectedRadio = document.querySelector('input[name="radio"]:checked');
+  var selectedOption = document.getElementById('options_individu').value;
+  var selectedYear = document.getElementById('slider').value;
+  var zoneValue;
+
+  // Vérifier si une catégorie est sélectionnée
+  if (selectedRadio) {
+    var selectedCategory = selectedRadio.value;
+
+    // Déterminer la valeur de zone en fonction de la catégorie sélectionnée
+    switch (selectedCategory) {
+      case 'Zones jugées sûres':
+        zoneValue = 1;
+        break;
+      case 'Zones jugées dangereuses':
+        zoneValue = 2;
+        break;
+      case 'Zones intersticielles':
+        zoneValue = 3;
+        break;
+      default:
+        zoneValue = 1; // Valeur par défaut
+        break;
+    }
+
+    // Utiliser une échelle de couleur continue
+    function getColor(normalizedValue, zoneValue) {
+      if (zoneValue === 1) {
+        return normalizedValue === 0 ? '#fff' :
+          normalizedValue < 0.2 ? '#f7fcfd' :
+            normalizedValue < 0.3 ? '#e5f5f9' :
+              normalizedValue < 0.4 ? '#ccece6' :
+                normalizedValue < 0.5 ? '#99d8c9' :
+                  normalizedValue < 0.6 ? '#66c2a4' :
+                    normalizedValue < 0.7 ? '#41ae76' :
+                      normalizedValue < 0.8 ? '#238b45' :
+                        normalizedValue < 0.9 ? '#006d2c' :
+                          normalizedValue <= 1 ? '#00441b' :
+                            '#2171b5';
+      } else if (zoneValue === 2) {
+        return normalizedValue === 0 ? '#fff' :
+          normalizedValue < 0.2 ? '#fff5f0' :
+            normalizedValue < 0.3 ? '#fee0d2' :
+              normalizedValue < 0.4 ? '#fcbba1' :
+                normalizedValue < 0.5 ? '#fc9272' :
+                  normalizedValue < 0.6 ? '#fb6a4a' :
+                    normalizedValue < 0.7 ? '#ef3b2c' :
+                      normalizedValue < 0.8 ? '#cb181d' :
+                        normalizedValue < 0.9 ? '#a50f15' :
+                          normalizedValue <= 1 ? '#67000d' :
+                            '#2171b5';
+      } else {
+        return d3.interpolateReds(normalizedValue);
+      }
+    }
+
+    // Construire l'URL avec les paramètres de requête annee, zone et option
+    var url;
+    if (selectedOption === 'all' || selectedOption === null) {
+      url = 'http://localhost:5000/japon?annee=' + selectedYear + '&zone=' + zoneValue;
+    } else {
+      url = 'http://localhost:5000/japon?annee=' + selectedYear + '&zone=' + zoneValue + '&options=' + selectedOption;
+    }
+    // Supprimer la couche existante de la carte
+    map.eachLayer(function (layer) {
+      if (layer instanceof L.GeoJSON) {
+        map.removeLayer(layer);
+      }
+    });
+
+    fetch(url, {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        var minCount = data.min_count;
+        var maxCount = data.max_count;
+
+        L.geoJson(data.geojson, {
+          style: function (feature) {
+            var id_dilem_counts = feature.properties.id_dilem_counts;
+            console.log("id_dilem_counts:", id_dilem_counts);
+            console.log("minCount:", minCount);
+            console.log("maxCount:", maxCount);
+            // Normaliser la valeur entre 0 et 1
+            var normalizedValue = (id_dilem_counts - minCount) / (maxCount - minCount);
+            console.log("normalizedValue:", normalizedValue);
+
+            // Définir la couleur en fonction du count
+            var color = getColor(normalizedValue, zoneValue);
+            console.log("color:", color);
+            return {
+              fillColor: color,
+              weight: 0,
+              opacity: 1,
+              color: 'white',
+              fillOpacity: 1
+            };
+          }
+        }).addTo(map);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  } else {
+    console.error('No radio button selected');
+  }
+}
+
+// Définir les limites géographiques de la couche Fukushima
+var fukushimaBounds = [
+  [36.9129, 139.2661], // Coin sud-ouest de Fukushima 
+  [37.7941, 140.8584]  // Coin nord-est de Fukushima
+];
+
+// Définir les limites géographiques du Japon
+var japanBounds = [
+  [30.287, 127.558], // Coin sud-ouest du Japon
+  [44.849, 143.698] // Coin nord-est du Japon
+];
+
+// Ajouter un écouteur d'événements pour surveiller les changements dans la liste déroulante
+document.getElementById('searchButton').addEventListener('click', function () {
+  // Récupérer la valeur sélectionnée du bouton radio
+  var selectedOption = document.querySelector('input[name="options_couche"]:checked').value;
+  var coucheValue;
+
+  // Déterminer la valeur de zone en fonction de la valeur sélectionnée du bouton radio
+  if (selectedOption === 'japan') {
+    coucheValue = 1; // Valeur pour le Japon
+    loadConsensusJapon(); // Charger la couche consensus_japon
+    bounds = japanBounds;
+  }
+  else if (selectedOption === 'fukushima') {
+    coucheValue = 2; // Valeur pour Fukushima
+    bounds = fukushimaBounds;
+    loadConsensusFukushima(coucheValue); // Filtrer les données pour la couche consensus_fukushima
+  } else {
+    console.error('Invalid option selected');
+    return; // Arrêter l'exécution si aucune option valide n'est sélectionnée
+  }
+
+  // Zoomer sur les limites géographiques définies
+  map.fitBounds(bounds, { padding: [50, 50] });
+});
+
+
+// Définir la fonction pour générer la légende
+function generateLegend(title, colors, labels) {
+  var legendDiv = document.getElementById('legend_groupe');
+  var legendContent = '';
+
+  legendContent += '<h3 class="legend-title">' + title + '</h3>';
+
+  // Générer les carrés colorés avec les étiquettes correspondantes
+  for (var i = 0; i < colors.length; i++) {
+    legendContent += '<div class="legend-item">';
+    legendContent += '<div class="legend-square" style="background-color:' + colors[i] + ';"></div>';
+    legendContent += '</div>';
+  }
+
+  legendContent += '<div class="legend-labels">';
+  for (var j = 0; j < labels.length; j++) {
+    legendContent += '<span class="legend-label">' + labels[j] + '</span>';
+  }
+  legendContent += '</div>';
+
+  legendDiv.innerHTML = legendContent;
+}
+
+// Fonction pour afficher la légende lorsque le bouton est cliqué
+function afficherLegende() {
+  var legend = document.getElementById("legend_groupe");
+  legend.style.display = "block";
+}
+
+// Ajouter un gestionnaire d'événements de clic au bouton pour afficher la légende
+document.getElementById("searchButton").addEventListener("click", afficherLegende);
+
+
+// BUTTON DE RECHERCHE 
+
+document.getElementById('searchButton').addEventListener('click', function () {
+  var selectedCategory = document.querySelector('input[name="radio"]:checked').value;
+
+  if (selectedCategory === 'Zones jugées sures') {
+    var title = 'Pourcentage des enquêtés sélectionnés<br>jugeant la zone sûre';
+    var colors = ['#f7fcfd', '#e5f5f9', '#ccece6', '#99d8c9', '#66c2a4', '#41ae76', '#238b45', '#006d2c', '#00441b'];
+    var labels = ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'];
+    generateLegend(title, colors, labels);
+  } else if (selectedCategory === 'Zones jugées dangereuses') {
+    var title = 'Pourcentage des enquêtés sélectionnés<br>jugeant la zone dangereuse'
+    var colors = ['#fff5f0', '#fee0d2', '#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d'];
+    var labels = ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'];
+    generateLegend(title, colors, labels);
+  } else {
+    console.error('Invalid option selected');
+    return; // Arrêter l'exécution si aucune option valide n'est sélectionnée
+  }
+});

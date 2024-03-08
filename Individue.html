@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parcours Type</title>
+  <title>Perception d'un individu</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!-- Leaflet CSS -->
@@ -23,68 +23,65 @@
   <!-- Header -->
   <div id="body2">
     <div class="container">
-        <header id="header2" class="border-bottom lh-1 py-1 fixed-top">
-            <div class="row flex-nowrap justify-content-between align-items-center">
-                <div class="col-6 pt-1">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="img/logo.png" alt="Bootstrap" width=100% height=100%>
-                        <a class="navbar-brand" href="index.html">Fukush-e-map</a>
-                    </a>
-                </div>
-                <div class="col-6">
-                    <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-                        <div class="card-container2">
-                            <div class="card2">
-                                <a id="lienImage1" href="index.html">
-                                    <div class="card--display2"
-                                        style="display: flex; align-items: center; justify-content: center;">
-                                        <img id="imageChanger1" src="img/Centrale_avant.png"class="person-icon">
-                                    </div>
-                                </a>
-                                <div class="card--border2"></div>
-                            </div>
-                        </div>
-
-                        <div class="card-container2">
-                            <div class="card2">
-                                <a id="lienImage2" href="Individue.html">
-                                    <div class="card--display2"
-                                        style="display: flex; align-items: center; justify-content: center;">
-                                        <img id="imageChanger2" src="img/Utilisateur_aprés.png"class="person-icon">
-                                    </div>
-                                </a>
-                                <div class="card--border2"></div>
-                            </div>
-                        </div>
-
-                        <div class="card-container2">
-                            <div class="card2">
-                                <a id="lienImage3" href="Groupe.html">
-                                    <div class="card--display2" style="display: flex; align-items: center; justify-content: center;">
-                                        <img id="imageChanger3" src="img/Groupe_avant.png" alt="Groupe" class="person-icon">
-                                    </div>
-                                </a>
-                                <div class="card--border2"></div>
-                            </div>
-                        </div>
-
-                        <div class="card-container2" >
-                            <div class="card2" >
-                                <a id="lienImage4" href="Source.html">
-                                    <div class="card--display2"
-                                        style="display: flex; align-items: center; justify-content: center;">
-                                        <img id="imageChanger4" src="img/info_avant.png" alt="Info" class="person-icon">
-                                    </div>
-                                </a>
-                                <div class="card--border2"></div>
-                            </div>
-                        </div>
+      <header id="header2" class="border-bottom lh-1 py-1 fixed-top">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col-6 pt-1">
+            <a class="navbar-brand" href="index.html">
+              <img src="img/logo.png" alt="Bootstrap" width=100% height=100%>
+              <a class="navbar-brand" href="index.html">Fukush-e-map</a>
+            </a>
+          </div>
+          <div class="col-6">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+              <div class="card-container2">
+                <div class="card2">
+                  <a id="lienImage1" href="index.html">
+                    <div class="card--display2" style="display: flex; align-items: center; justify-content: center;">
+                      <img id="imageChanger1" src="img/Centrale_avant.png" class="person-icon">
                     </div>
+                  </a>
+                  <div class="card--border2"></div>
                 </div>
+              </div>
+
+              <div class="card-container2">
+                <div class="card2">
+                  <a id="lienImage2" href="Individue.html">
+                    <div class="card--display2" style="display: flex; align-items: center; justify-content: center;">
+                      <img id="imageChanger2" src="img/Utilisateur_aprés.png" class="person-icon">
+                    </div>
+                  </a>
+                  <div class="card--border2"></div>
+                </div>
+              </div>
+
+              <div class="card-container2">
+                <div class="card2">
+                  <a id="lienImage3" href="Groupe.html">
+                    <div class="card--display2" style="display: flex; align-items: center; justify-content: center;">
+                      <img id="imageChanger3" src="img/Groupe_avant.png" alt="Groupe" class="person-icon">
+                    </div>
+                  </a>
+                  <div class="card--border2"></div>
+                </div>
+              </div>
+
+              <div class="card-container2">
+                <div class="card2">
+                  <a id="lienImage4" href="Source.html">
+                    <div class="card--display2" style="display: flex; align-items: center; justify-content: center;">
+                      <img id="imageChanger4" src="img/info_avant.png" alt="Info" class="person-icon">
+                    </div>
+                  </a>
+                  <div class="card--border2"></div>
+                </div>
+              </div>
             </div>
-        </header>
+          </div>
+        </div>
+      </header>
     </div>
-</div>
+  </div>
 
   <div id="map-container-wrapper" class="custom-map-container">
     <div id="mapContainer1" class="map">
@@ -109,6 +106,7 @@
                 </h1>
                 <h4>Trajectoire et Perception Individuelle</h4>
                 <hr>
+                <hr>
                 <div>
                   <h5>Choix de l'individu type</h5>
                   <select id="id_dilemSelect">
@@ -118,25 +116,20 @@
                   </select>
                 </div>
                 <hr>
-
                 <div>
-                  <h5>Echelle de la carte</h5>
-                  <input type="radio" id="option1" name="options" value="japan" onclick="zoomToJapan()">
+                  <h5>Echelle de la Carte</h5>
+                  <input type="radio" id="option1" name="options" value="japan" onclick="zoomToJapan()" checked>
                   <label for="option1">Japon</label><br>
                   <input type="radio" id="option2" name="options" value="fukushima" onclick="zoomToFukushima()">
                   <label for="option2">Fukushima</label><br>
                 </div>
                 <hr>
-
-                <div id="individu_section" style="display:none;">
+                <div>
                   <h5>Trajectoire de l'individu</h5>
                   <button id="toggleLayer1" aria-label="Afficher/masquer la couche"><i id="Trajectoire"
                       class="far fa-eye"></i></button>
                   <label for="toggleLayer1">Trajectoire</label><br>
-
-                </div>
-                <hr>
-                <div id="fukushima_section" style="display:none;">
+                  <hr>
                   <h5>Perception du risque</h5>
                   <button id="toggleLayer2" aria-label="Afficher/masquer la couche"><i id="Tracer_risques_indiv"
                       class="far fa-eye"></i></button>

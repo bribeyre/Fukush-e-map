@@ -428,3 +428,67 @@ select {
 
 h1:hover .highlight-text {
   display: inline;}
+
+  
+
+/* Legend Carte de consensus page Groupe */
+
+
+.style_boutons_divisions_adm {
+  background-color: transparent; /* Supprime le fond gris */
+  border: none; /* Supprime les bordures */
+  cursor: pointer; /* Change le curseur au survol */
+  color: #333; /* Couleur du texte */
+  font-size: small; /* Taille de la police */
+  padding: 0; /* Supprimer le rembourrage */
+  margin: 0; /* Supprimer la marge */
+}
+
+.style_boutons_divisions_adm:hover {
+  color: #666; /* Couleur du texte au survol */
+}
+
+#legend_groupe {
+  position: absolute;
+    bottom: 25px;
+    right: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); /* Ajouter un effet d'ombre */
+    z-index: 1000;
+
+
+}
+
+.legend-item {
+  display: inline-block; /* Ajoutez la marge nécessaire entre les éléments */
+}
+
+.legend-square {
+  display: inline-block;
+  width: 37px; /* Ajustez la largeur du carré selon vos préférences */
+  height: 20px;
+  margin: 0px 0px 0px -4.5px; /* Ajustez la hauteur du carré selon vos préférences */
+  border-top: 1px solid #ccc; /* Ajouter un contour gris */
+  border-bottom: 1px solid #ccc;
+  border-radius: 0.5px;
+  vertical-align: middle; /* Alignement vertical au centre */
+}
+
+.legend-label {
+  display: inline-block;
+  vertical-align: middle; /* Alignement vertical au centre */
+  text-align: center; /* Alignement horizontal au centre */
+}
+
+
+.legend-label {
+  display: inline-block;
+  margin: 0px 14.5px 0px 0px
+}
+
+.legend-title {
+  font-size: 15px;
+}

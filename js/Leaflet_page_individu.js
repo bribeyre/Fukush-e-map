@@ -68,26 +68,115 @@ function toggleFullScreen() {
 }
 
 // PLEIN ECRAN FIN
+var toggleButton1 = document.getElementById('toggleLayer1');
+var toggleButton2 = document.getElementById('toggleLayer2');
+
+// État initial des couches (visibles)
+var layer1Visible = true;
+var layer2Visible = true;
+
+// Ajout d'un écouteur d'événements au clic sur le bouton de bascule
+toggleButton1.addEventListener('click', function () {
+  if (layer1Visible) {
+    // Masquer la couche 1 si elle est actuellement visible
+    map.removeLayer(individusLayer);
+    map.removeLayer(polyline); // Supprimer la polyligne lorsque la couche est masquée
+    layer1Visible = false;
+    // Mettre à jour l'icône du bouton
+    toggleButton1.innerHTML = '<i class="far fa-eye-slash"></i>';
+  } else {
+    // Afficher la couche 1 si elle est actuellement masquée
+    individusLayer.addTo(map);
+    if (polyline) {
+      map.addLayer(polyline); // Ajouter la polyligne lorsque la couche est affichée
+    }
+    layer1Visible = true;
+    // Mettre à jour l'icône du bouton
+    toggleButton1.innerHTML = '<i class="far fa-eye"></i>';
+    polyline.bringToFront();
+    individusLayer.bringToFront();
+  }
+});
+
+var fukushimaLayerVisible = false; // Variable pour suivre l'état de visibilité de la couche fukushimaLayer
+var japanLayerVisible = false; // Variable pour suivre l'état de visibilité de la couche japanLayer
+
+// Fonction pour activer la couche Japan et désactiver la couche Fukushima
+function activateJapanLayer() {
+  if (japanLayerVisible) return;
+  if (fukushimaLayerVisible) {
+    map.removeLayer(fukushimaLayer);
+    fukushimaLayerVisible = false;
+  }
+  map.addLayer(japanLayer);
+  japanLayerVisible = true;
+  // Assurez-vous que polyline est initialisé avant de l'utiliser
+  if (polyline) {
+    polyline.bringToFront();
+  }
+}
+
+// Fonction pour activer la couche Fukushima et désactiver la couche Japan
+function activateFukushimaLayer() {
+  if (fukushimaLayerVisible) return;
+  if (japanLayerVisible) {
+    map.removeLayer(japanLayer);
+    japanLayerVisible = false;
+  }
+  map.addLayer(fukushimaLayer);
+  fukushimaLayerVisible = true;
+  // Assurez-vous que polyline est initialisé avant de l'utiliser
+  if (polyline) {
+    polyline.bringToFront();
+  }
+}
+
+// Modification de la fonction toggleButton2.addEventListener
+toggleButton2.addEventListener('click', function () {
+  // Si la couche 2 est actuellement visible
+  if (layer2Visible) {
+    // Masquer la couche 2 si elle est actuellement visible
+    map.removeLayer(fukushimaLayer);
+    map.removeLayer(japanLayer);
+    layer2Visible = false;
+    // Mettre à jour l'icône du bouton
+    toggleButton2.innerHTML = '<i class="far fa-eye-slash"></i>';
+  } else {
+    // Afficher la couche correspondante à l'état des boutons d'échelle de la carte
+    if (document.getElementById('option1').checked) {
+      map.addLayer(japanLayer);
+    } else {
+      map.addLayer(fukushimaLayer);
+    }
+    layer2Visible = true;
+    // Mettre à jour l'icône du bouton
+    toggleButton2.innerHTML = '<i class="far fa-eye"></i>';
+    if (polyline) {
+      polyline.bringToFront();
+    }
+    individusLayer.bringToFront();
+  }
+});
 
 
 // DEBUT ZOOM TO JAPAN
-function zoomToJapan() {
-  // Définir une étendue qui couvre l'ensemble du Japon
-  var bounds = [
-    [20.0, 122.0], // Coin sud-ouest
-    [45.0, 155.0]  // Coin nord-est
-  ];
 
-  // Centrer et zoomer sur l'ensemble du Japon
-  map.fitBounds(bounds, { padding: [50, 50], maxZoom: 6 }); // Vous pouvez ajuster le padding selon vos besoins
+// Fonction pour zoomer sur le Japon et afficher uniquement la couche Japan
+function zoomToJapan() {
+  var bounds = [
+    [20.0, 122.0],
+    [45.0, 155.0]
+  ];
+  map.fitBounds(bounds, { padding: [50, 50] });
+  activateJapanLayer();
 }
 
 function zoomToFukushima() {
-  map.flyTo([37.41209716212062, 140.11240156125362], 10, {
-    duration: 1, // Durée du déplacement en secondes
-    easeLinearity: 0. // Facteur de linéarité de l'animation
-  }); // Centrer sur Fukushima
+  map.setView([37.41209716212062, 140.11240156125362], 9); // Centrer sur Fukushima
+  // Activer la couche Fukushima
+  activateFukushimaLayer();
 }
+
 // FIN ZOOM TO JAPAN FIN
 
 // DEBUT PREFECTURE
@@ -144,56 +233,8 @@ fetch('data/prefecture.geojson')
 
 // CODE PAGE INDIVIDUELLE
 
-var toggleButton1 = document.getElementById('toggleLayer1');
-var toggleButton2 = document.getElementById('toggleLayer2');
-
-// État initial des couches (visibles)
-var layer1Visible = true;
-var layer2Visible = true;
-
-// Ajout d'un écouteur d'événements au clic sur le bouton de bascule
-toggleButton1.addEventListener('click', function () {
-  if (layer1Visible) {
-    // Masquer la couche 1 si elle est actuellement visible
-    map.removeLayer(individusLayer);
-    map.removeLayer(polyline); // Supprimer la polyligne lorsque la couche est masquée
-    layer1Visible = false;
-    // Mettre à jour l'icône du bouton
-    toggleButton1.innerHTML = '<i class="far fa-eye-slash"></i>';
-  } else {
-    // Afficher la couche 1 si elle est actuellement masquée
-    individusLayer.addTo(map);
-    if (polyline) {
-      map.addLayer(polyline); // Ajouter la polyligne lorsque la couche est affichée
-    }
-    layer1Visible = true;
-    // Mettre à jour l'icône du bouton
-    toggleButton1.innerHTML = '<i class="far fa-eye"></i>';
-  }
-});
-
-// Ajout d'un écouteur d'événements au clic sur le bouton de bascule pour la couche 2
-toggleButton2.addEventListener('click', function () {
-  if (layer2Visible) {
-    // Masquer la couche 2 si elle est actuellement visible
-    map.removeLayer(fukushimaLayer);
-    layer2Visible = false;
-    // Mettre à jour l'icône du bouton
-    toggleButton2.innerHTML = '<i class="far fa-eye-slash"></i>';
-  } else {
-    // Afficher la couche 2 si elle est actuellement masquée
-    fukushimaLayer.addTo(map);
-    layer2Visible = true;
-    // Mettre à jour l'icône du bouton
-    toggleButton2.innerHTML = '<i class="far fa-eye"></i>';
-  }
-});
-
-
 
 // Couche INDIVIDU 
-
-
 
 var individusLayer = L.geoJSON().addTo(map);
 var polyline = null; // Déclaration de la variable globale pour la polyligne
@@ -211,6 +252,10 @@ function addindividusLayer(url) {
       return response.json();
     })
     .then(jsonData => {
+      // Trier les données par année dans l'ordre décroissant
+      jsonData.features.sort((a, b) => {
+        return parseInt(b.properties.Annee) - parseInt(a.properties.Annee);
+      });
       // Stocker les données dans la variable data globale
       data = jsonData;
 
@@ -226,34 +271,96 @@ function addindividusLayer(url) {
           // Création de la couche GeoJSON si une option est sélectionnée
           individusLayer = L.geoJSON(data, {
             pointToLayer: function (feature, latlng) {
-              // Personnalisez le marqueur pour chaque point
-              return L.circleMarker(latlng, {
-                radius: 8,
-                fillColor: 'blue',
-                color: '#000',
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-              });
+              // Vérifier si l'année est égale à 0
+              if (feature.properties.Annee === 0) {
+                // Retourner un marqueur de type carré
+                return L.marker(latlng, {
+                  icon: L.divIcon({
+                    className: 'square-icon',
+                    iconSize: [10, 10],
+                    html: '<div style="width: 10px; height: 10px; background-color: white; border: 1px solid black;"></div>'
+                  })
+                });
+              } else {
+                // Personnalisez le marqueur pour chaque point
+                var annee = feature.properties.Annee; // Convertir en chaîne de caractères
+                // Déterminez le style en fonction de l'année
+                var fillColor;
+                switch (annee) {
+                  case 2017:
+                    fillColor = '#bd0026';
+                    break;
+                  case 2016:
+                    fillColor = '#f03b20';
+                    break;
+                  case 2015:
+                    fillColor = '#fd8d3c';
+                    break;
+                  case 2014:
+                    fillColor = '#feb24c';
+                    break;
+                  case 2013:
+                    fillColor = '#fed976';
+                    break;
+                  case 2011:
+                    fillColor = '#ffffb2';
+                    break;
+                }
+                var CumulDepl = feature.properties.CumulDepl; // Obtenez la valeur de CumulDepl
+                function getRadiusForCumulDepl(CumulDepl) {
+                  switch (CumulDepl) {
+                    case 1:
+                      return 7;
+                    case 2:
+                      return 12;
+                    case 3:
+                      return 17;
+                    case 4:
+                      return 22;
+                    case 5:
+                      return 27;
+                    case 6:
+                      return 32;
+                  }
+                }
+                return L.circleMarker(latlng, {
+                  fillColor: fillColor,
+                  color: '#000',
+                  weight: 0.5,
+                  opacity: 1,
+                  fillOpacity: 0.8,
+                  radius: getRadiusForCumulDepl(CumulDepl) // Appeler la fonction pour obtenir le rayon
+                });
+              }
             },
             onEachFeature: function (feature, layer) {
               // Ajout d'une popup à chaque élément de la couche GeoJSON
               if (feature.properties && feature.properties.ID_DILEM) {
                 var statut = feature.properties.Statut ? feature.properties.Statut : "";
-                layer.bindPopup(feature.properties.ID_DILEM + '<br>' + feature.properties.Annee + '<br>' + statut);
+                layer.bindPopup('<strong>' + feature.properties.ID_DILEM + '</strong>' +
+                  (feature.properties.Annee !== 0 ? '<br>Année : ' + feature.properties.Annee : '<br>Lieu de naissance : ' + feature.properties.Ville + ', ' + feature.properties.Departement) +
+                  (feature.properties.Statut ? '<br>Statut : ' + feature.properties.Statut : '') +
+                  (feature.properties.Sexe ? '<br>Sexe : ' + feature.properties.Sexe : '') +
+                  (feature.properties.ClassAge ? '<br>Classe d\'âge : ' + feature.properties.ClassAge + ' ans' : '') +
+                  (feature.properties.EtatCiv ? '<br>Etat civil : ' + feature.properties.EtatCiv : '') +
+                  (feature.properties.SituMenage ? '<br>Situation du ménage : ' + feature.properties.SituMenage : '') +
+                  (feature.properties.Profession ? '<br>Profession : ' + feature.properties.Profession : '') +
+                  (feature.properties.Revenu ? '<br>Revenu annuel : ' + feature.properties.Revenu : '') +
+                  (feature.properties.Annee !== 0 && feature.properties.Ville && feature.properties.Departement ? '<br>Résidence : ' + feature.properties.Ville + ', ' + feature.properties.Departement : '')
+                );
               }
             }
           }).addTo(map);
 
           // Mettre à jour les éléments de la couche GeoJSON en fonction de l'année sélectionnée
-          updateData(selectedid_dilem);
+          updateIndividus(selectedid_dilem);
         } else {
           // Si aucune option n'est sélectionnée, supprimer la couche GeoJSON de la carte
           if (individusLayer) {
             map.removeLayer(individusLayer);
           }
-          // Appeler updateData() avec un argument vide pour supprimer les lignes
-          updateData("");
+          // Appeler updateIndividus() avec un argument vide pour supprimer les lignes
+          updateIndividus("");
         }
       });
     })
@@ -262,9 +369,8 @@ function addindividusLayer(url) {
     });
 }
 
-
 // Fonction pour mettre à jour les éléments de la couche GeoJSON en fonction de l'ID sélectionné
-function updateData(id_dilem) {
+function updateIndividus(id_dilem) {
   individusLayer.clearLayers();
   var filteredFeatures = data.features.filter(function (feature) {
     return feature.properties.ID_DILEM === id_dilem;
@@ -302,10 +408,7 @@ addindividusLayer("data/individus.geojson");
 
 
 
-
-// AJOUT FUKUSHIMA LAYER
-
-
+var selectedYear = 2013; // Année par défaut
 
 var fukushimaLayer = L.geoJSON().addTo(map);
 var dataFukushima; // Déclaration de la variable dataFukushima
@@ -324,6 +427,7 @@ function addFukushimaLayer(url) {
       // Événement de changement sur le formulaire de sélection d'année
       document.getElementById('id_dilemSelect').addEventListener('change', function () {
         var selectedid_dilem = this.value;
+        // Vérifier si une option a été sélectionnée
         if (selectedid_dilem !== "") {
           if (fukushimaLayer) {
             map.removeLayer(fukushimaLayer);
@@ -333,15 +437,19 @@ function addFukushimaLayer(url) {
               return {
                 fillColor: feature.properties.Zone === 1 ? 'lightgreen' : 'darkred',
                 color: '#000',
-                weight: 2,
+                weight: 1,
                 opacity: 1,
                 fillOpacity: 0.5
               };
             }
           });
-
           // Mettre à jour les entités Fukushima lors de la sélection d'une option
-          updateFukushima(selectedid_dilem);
+          updateFukushima(selectedid_dilem, selectedYear);
+        } else {
+          // Si "Aucun ID" est sélectionné, supprimer la couche Fukushima de la carte
+          if (map.hasLayer(fukushimaLayer)) {
+            map.removeLayer(fukushimaLayer);
+          }
         }
       });
     })
@@ -352,27 +460,40 @@ function addFukushimaLayer(url) {
 
 // Fonction pour mettre à jour les entités de Fukushima en fonction de l'ID sélectionné et de l'année
 function updateFukushima(id_dilem, selectedYear) {
-  selectedYear = selectedYear || 2013;
+  if (!layer2Visible) return;
+  if (id_dilem === "") {
+    // Si aucun ID n'est sélectionné, supprimer la couche Fukushima de la carte
+    if (map.hasLayer(fukushimaLayer)) {
+      map.removeLayer(fukushimaLayer);
+    }
+    return; // Sortie de la fonction
+  }
+
   if (!fukushimaLayer) {
     return; // Sortie si la couche Fukushima n'a pas été ajoutée
   }
+
+  var fukushimaLayerWasVisible = fukushimaLayerVisible;
 
   fukushimaLayer.clearLayers();
   var filteredFeatures = dataFukushima.features.filter(function (feature) {
     return feature.properties.ID_DILEM === id_dilem && feature.properties.Annee === selectedYear; // Filtrer par l'année spécifiée
   });
-  console.log('Nombre de dessins filtrés par l\'ID', id_dilem, 'et année', selectedYear, ':', filteredFeatures.length);
+  console.log('Nombre de dessins filtrés par l\'ID', id_dilem, 'et année', selectedYear, 'pour Fukushima:', filteredFeatures.length);
   fukushimaLayer.addData({ type: 'FeatureCollection', features: filteredFeatures });
 
-  // Ajouter la couche Fukushima à la carte si elle n'est pas déjà ajoutée
-  if (!map.hasLayer(fukushimaLayer)) {
-    fukushimaLayer.addTo(map);
+  if (fukushimaLayerWasVisible) {
+    // Si la couche Fukushima était visible avant la mise à jour, la réactiver
+    map.addLayer(fukushimaLayer);
   }
+  polyline.bringToFront();
+  individusLayer.bringToFront();
 }
+
 
 // Événement de changement sur le curseur de sélection d'année
 document.getElementById('slider').addEventListener('input', function () {
-  var selectedYear = parseInt(this.value); // Récupérer la nouvelle année sélectionnée
+  selectedYear = parseInt(this.value); // Récupérer la nouvelle année sélectionnée
   var selectedid_dilem = document.getElementById('id_dilemSelect').value; // Récupérer l'ID_DILEM actuellement sélectionné
   updateFukushima(selectedid_dilem, selectedYear); // Mettre à jour les entités Fukushima avec la nouvelle année
 });
@@ -381,31 +502,97 @@ document.getElementById('slider').addEventListener('input', function () {
 addFukushimaLayer("data/fukushima.geojson");
 
 
-// FIN PAGE INDIVIDUELLE
 
-// TEST LEGENDE 
 
-// MASQUER LA TRAJECTOIRE 
-document.getElementById('id_dilemSelect').addEventListener('change', function () {
-  var selectedValue = this.value;
-  var trajectoireSection = document.getElementById('individu_section');
-  var fukushimaDataSection = document.getElementById('fukushima_section');
 
-  // Si une option est sélectionnée, afficher la section de trajectoire et la couche Fukushima
-  // Sinon, les masquer
-  if (selectedValue !== '') {
-    trajectoireSection.style.display = 'block';
-    fukushimaDataSection.style.display = 'block';
-  } else {
-    trajectoireSection.style.display = 'none';
-    fukushimaDataSection.style.display = 'none';
-    // Masquer la trajectoire
-    if (polyline) {
-      map.removeLayer(polyline);
+var japanLayer = L.geoJSON().addTo(map);
+var dataJapan; // Déclaration de la variable dataJapan
+
+function addJapanLayer(url) {
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erreur lors du chargement du fichier GeoJSON');
+      }
+      return response.json();
+    })
+    .then(jsonData => {
+      dataJapan = jsonData;
+
+      // Événement de changement sur le formulaire de sélection d'année
+      document.getElementById('id_dilemSelect').addEventListener('change', function () {
+        var selectedid_dilem = this.value;
+        // Vérifier si une option a été sélectionnée
+        if (selectedid_dilem !== "") {
+          if (japanLayer) {
+            map.removeLayer(japanLayer);
+          }
+          japanLayer = L.geoJSON(dataJapan, {
+            style: function (feature) {
+              return {
+                fillColor: feature.properties.Zone === 1 ? 'lightgreen' : 'darkred',
+                color: '#000',
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.5
+              };
+            }
+          });
+          // Mettre à jour les entités Japan lors de la sélection d'une option
+          updateJapan(selectedid_dilem, selectedYear);
+        } else {
+          // Si "Aucun ID" est sélectionné, supprimer la couche Japan de la carte
+          if (map.hasLayer(japanLayer)) {
+            map.removeLayer(japanLayer);
+          }
+        }
+      });
+    })
+    .catch(error => {
+      console.error('Erreur de chargement des données :', error);
+    });
+}
+
+// Fonction pour mettre à jour les entités de Japan en fonction de l'ID sélectionné et de l'année
+function updateJapan(id_dilem, selectedYear) {
+  if (!layer2Visible) return;
+  if (id_dilem === "") {
+    // Si aucun ID n'est sélectionné, supprimer la couche Japan de la carte
+    if (map.hasLayer(japanLayer)) {
+      map.removeLayer(japanLayer);
     }
-    // Masquer la couche Fukushima
-    if (map.hasLayer(fukushimaLayer)) {
-      map.removeLayer(fukushimaLayer);
-    }
+    return; // Sortie de la fonction
   }
+
+  if (!japanLayer) {
+    return; // Sortie si la couche Japan n'a pas été ajoutée
+  }
+
+  var japanLayerWasVisible = japanLayerVisible;
+
+  japanLayer.clearLayers();
+  var filteredFeatures = dataJapan.features.filter(function (feature) {
+    return feature.properties.ID_DILEM === id_dilem && feature.properties.Annee === selectedYear; // Filtrer par l'année spécifiée
+  });
+  console.log('Nombre de dessins filtrés par l\'ID', id_dilem, 'et année', selectedYear, 'pour Japan:', filteredFeatures.length);
+  japanLayer.addData({ type: 'FeatureCollection', features: filteredFeatures });
+
+  if (japanLayerWasVisible) {
+    // Si la couche Japan était visible avant la mise à jour, la réactiver
+    map.addLayer(japanLayer);
+  }
+  polyline.bringToFront();
+  individusLayer.bringToFront();
+}
+
+// Événement de changement sur le curseur de sélection d'année
+document.getElementById('slider').addEventListener('input', function () {
+  selectedYear = parseInt(this.value); // Récupérer la nouvelle année sélectionnée
+  var selectedid_dilem = document.getElementById('id_dilemSelect').value; // Récupérer l'ID_DILEM actuellement sélectionné
+  updateJapan(selectedid_dilem, selectedYear); // Mettre à jour les entités Japan avec la nouvelle année
 });
+
+// Appel de la fonction addJapanLayer avec l'URL de votre fichier GeoJSON
+addJapanLayer("data/japon.geojson");
+
+activateJapanLayer();
