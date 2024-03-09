@@ -233,6 +233,7 @@ document.getElementById('showSecondMapCheckbox').addEventListener('change', func
 
 // AJOUT DES PERCEPTION
 
+
 // Fonction pour filtrer les données en fonction de la catégorie sélectionnée
 function loadConsensusFukushima() {
   var selectedRadio = document.querySelector('input[name="radio"]:checked');
@@ -564,6 +565,19 @@ function generateLegend(title, colors, labels) {
 
   legendDiv.innerHTML = legendContent;
 }
+
+// Fonction pour afficher la légende lorsque le bouton est cliqué
+function afficherLegende() {
+  var legend = document.getElementById("legend_groupe");
+  legend.style.display = "block";
+}
+
+// Ajouter un gestionnaire d'événements de clic au bouton pour afficher la légende
+document.getElementById("searchButton").addEventListener("click", afficherLegende);
+
+
+// BUTTON DE RECHERCHE 
+
 
 document.getElementById('searchButton').addEventListener('click', function () {
   var selectedCategory = document.querySelector('input[name="radio"]:checked').value;
