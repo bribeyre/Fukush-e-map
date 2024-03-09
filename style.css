@@ -451,16 +451,14 @@ h1:hover .highlight-text {
 
 #legend_groupe {
   position: absolute;
-    bottom: 25px;
-    right: 8px;
+    bottom: 90px;
+    right: 20px;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 5px;
     font-family: Arial, sans-serif;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); /* Ajouter un effet d'ombre */
     z-index: 1000;
-
-
 }
 
 .legend-item {
@@ -482,12 +480,12 @@ h1:hover .highlight-text {
   display: inline-block;
   vertical-align: middle; /* Alignement vertical au centre */
   text-align: center; /* Alignement horizontal au centre */
+  margin: 0px 20px 0px 0px; /* Ajouter de la marge */
+  
 }
 
-
-.legend-label {
-  display: inline-block;
-  margin: 0px 14.5px 0px 0px
+.legend-content {
+  margin-left: 50px; /* Déplacer seulement les éléments de légende vers la droite */
 }
 
 .legend-title {
