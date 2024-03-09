@@ -233,7 +233,6 @@ document.getElementById('showSecondMapCheckbox').addEventListener('change', func
 
 // AJOUT DES PERCEPTION
 
-
 // Fonction pour filtrer les données en fonction de la catégorie sélectionnée
 function loadConsensusFukushima() {
   var selectedRadio = document.querySelector('input[name="radio"]:checked');
@@ -253,7 +252,7 @@ function loadConsensusFukushima() {
       case 'Zones jugées dangereuses':
         zoneValue = 2;
         break;
-      case 'Zones intersticielles':
+      case 'Zones interstitielles':
         zoneValue = 3;
         break;
       default:
@@ -265,40 +264,60 @@ function loadConsensusFukushima() {
     function getColor(normalizedValue, zoneValue) {
       if (zoneValue === 1) {
         return normalizedValue === 0 ? '#fff' :
-          normalizedValue < 0.2 ? '#f7fcfd' :
-            normalizedValue < 0.3 ? '#e5f5f9' :
-              normalizedValue < 0.4 ? '#ccece6' :
-                normalizedValue < 0.5 ? '#99d8c9' :
-                  normalizedValue < 0.6 ? '#66c2a4' :
-                    normalizedValue < 0.7 ? '#41ae76' :
-                      normalizedValue < 0.8 ? '#238b45' :
-                        normalizedValue < 0.9 ? '#006d2c' :
-                          normalizedValue <= 1 ? '#00441b' :
-                            '#2171b5';
+          normalizedValue < 0.1 ? '#f7fcfd' :
+            normalizedValue < 0.2 ? '#e5f5f9' :
+              normalizedValue < 0.3 ? '#ccece6' :
+                normalizedValue < 0.4 ? '#99d8c9' :
+                  normalizedValue < 0.5 ? '#66c2a4' :
+                    normalizedValue < 0.6 ? '#41ae76' :
+                      normalizedValue < 0.7 ? '#238b45' :
+                        normalizedValue < 0.8 ? '#006d2c' :
+                          normalizedValue < 0.9 ? '#00441b' :
+                            normalizedValue <= 1 ? '#003013' :
+                              '#2171b5';
       } else if (zoneValue === 2) {
         return normalizedValue === 0 ? '#fff' :
-          normalizedValue < 0.2 ? '#fff5f0' :
-            normalizedValue < 0.3 ? '#fee0d2' :
-              normalizedValue < 0.4 ? '#fcbba1' :
-                normalizedValue < 0.5 ? '#fc9272' :
-                  normalizedValue < 0.6 ? '#fb6a4a' :
-                    normalizedValue < 0.7 ? '#ef3b2c' :
-                      normalizedValue < 0.8 ? '#cb181d' :
-                        normalizedValue < 0.9 ? '#a50f15' :
-                          normalizedValue <= 1 ? '#67000d' :
-                            '#2171b5';
+          normalizedValue < 0.1 ? '#fff5f0' :
+            normalizedValue < 0.2 ? '#fee0d2' :
+              normalizedValue < 0.3 ? '#fcbba1' :
+                normalizedValue < 0.4 ? '#fc9272' :
+                  normalizedValue < 0.5 ? '#fb6a4a' :
+                    normalizedValue < 0.6 ? '#ef3b2c' :
+                      normalizedValue < 0.7 ? '#cb181d' :
+                        normalizedValue < 0.8 ? '#a50f15' :
+                          normalizedValue < 0.9 ? '#67000d' :
+                            normalizedValue <= 1 ? '#400008' :
+                              '#2171b5';
+      } else if (zoneValue === 3) {
+        return normalizedValue === 0 ? '#000000' :
+          normalizedValue < 0.1 ? '#1f1f1f' :
+            normalizedValue < 0.2 ? '#252525' :
+              normalizedValue < 0.3 ? '#525252' :
+                normalizedValue < 0.4 ? '#737373' :
+                  normalizedValue < 0.5 ? '#969696' :
+                    normalizedValue < 0.6 ? '#bdbdbd' :
+                      normalizedValue < 0.7 ? '#d9d9d9' :
+                        normalizedValue < 0.8 ? '#f0f0f0' :
+                          normalizedValue < 0.9 ? '#f8f8f8' :
+                            normalizedValue <= 1 ? '#fff' :
+                              '#2171b5';
       } else {
         return d3.interpolateReds(normalizedValue);
       }
     }
 
     // Construire l'URL avec les paramètres de requête annee, zone et option
-    var url;
-    if (selectedOption === 'all' || selectedOption === null) {
-      url = 'http://localhost:5000/fukushima?annee=' + selectedYear + '&zone=' + zoneValue;
-    } else {
-      url = 'http://localhost:5000/fukushima?annee=' + selectedYear + '&zone=' + zoneValue + '&options=' + selectedOption;
+    var url = 'http://localhost:5000/fukushima?annee=' + selectedYear
+    //on va chercher la zone
+    if (zoneValue !== 3) {
+      url += '&zone=' + zoneValue
     }
+    //on regarde les statuts 
+    if (selectedOption !== 'all' && selectedOption !== null) {
+      url += '&options=' + selectedOption;
+    }
+
+    console.log(url)
     // Supprimer la couche existante de la carte
     map.eachLayer(function (layer) {
       if (layer instanceof L.GeoJSON) {
@@ -316,6 +335,9 @@ function loadConsensusFukushima() {
         var minCount = data.min_count;
         var maxCount = data.max_count;
 
+        //récupérer le maxCount pour afficher le nombre d'enquêté affiché
+        document.getElementById('maxCount').innerText = "Nombre d'individus filtrés : " + maxCount;
+
         L.geoJson(data.geojson, {
           style: function (feature) {
             var id_dilem_counts = feature.properties.id_dilem_counts;
@@ -328,7 +350,7 @@ function loadConsensusFukushima() {
 
             // Définir la couleur en fonction du count
             var color = getColor(normalizedValue, zoneValue);
-            console.log("color:", color);
+            // console.log("color:", color);
             return {
               fillColor: color,
               weight: 0,
@@ -366,7 +388,7 @@ function loadConsensusJapon() {
       case 'Zones jugées dangereuses':
         zoneValue = 2;
         break;
-      case 'Zones intersticielles':
+      case 'Zones interstitielles':
         zoneValue = 3;
         break;
       default:
@@ -378,40 +400,60 @@ function loadConsensusJapon() {
     function getColor(normalizedValue, zoneValue) {
       if (zoneValue === 1) {
         return normalizedValue === 0 ? '#fff' :
-          normalizedValue < 0.2 ? '#f7fcfd' :
-            normalizedValue < 0.3 ? '#e5f5f9' :
-              normalizedValue < 0.4 ? '#ccece6' :
-                normalizedValue < 0.5 ? '#99d8c9' :
-                  normalizedValue < 0.6 ? '#66c2a4' :
-                    normalizedValue < 0.7 ? '#41ae76' :
-                      normalizedValue < 0.8 ? '#238b45' :
-                        normalizedValue < 0.9 ? '#006d2c' :
-                          normalizedValue <= 1 ? '#00441b' :
-                            '#2171b5';
+          normalizedValue < 0.1 ? '#f7fcfd' :
+            normalizedValue < 0.2 ? '#e5f5f9' :
+              normalizedValue < 0.3 ? '#ccece6' :
+                normalizedValue < 0.4 ? '#99d8c9' :
+                  normalizedValue < 0.5 ? '#66c2a4' :
+                    normalizedValue < 0.6 ? '#41ae76' :
+                      normalizedValue < 0.7 ? '#238b45' :
+                        normalizedValue < 0.8 ? '#006d2c' :
+                          normalizedValue < 0.9 ? '#00441b' :
+                            normalizedValue <= 1 ? '#003013' :
+                              '#2171b5';
       } else if (zoneValue === 2) {
         return normalizedValue === 0 ? '#fff' :
-          normalizedValue < 0.2 ? '#fff5f0' :
-            normalizedValue < 0.3 ? '#fee0d2' :
-              normalizedValue < 0.4 ? '#fcbba1' :
-                normalizedValue < 0.5 ? '#fc9272' :
-                  normalizedValue < 0.6 ? '#fb6a4a' :
-                    normalizedValue < 0.7 ? '#ef3b2c' :
-                      normalizedValue < 0.8 ? '#cb181d' :
-                        normalizedValue < 0.9 ? '#a50f15' :
-                          normalizedValue <= 1 ? '#67000d' :
-                            '#2171b5';
+          normalizedValue < 0.1 ? '#fff5f0' :
+            normalizedValue < 0.2 ? '#fee0d2' :
+              normalizedValue < 0.3 ? '#fcbba1' :
+                normalizedValue < 0.4 ? '#fc9272' :
+                  normalizedValue < 0.5 ? '#fb6a4a' :
+                    normalizedValue < 0.6 ? '#ef3b2c' :
+                      normalizedValue < 0.7 ? '#cb181d' :
+                        normalizedValue < 0.8 ? '#a50f15' :
+                          normalizedValue < 0.9 ? '#67000d' :
+                            normalizedValue <= 1 ? '#400008' :
+                              '#2171b5';
+      } else if (zoneValue === 3) {
+        return normalizedValue === 0 ? '#000000' :
+          normalizedValue < 0.1 ? '#1f1f1f' :
+            normalizedValue < 0.2 ? '#252525' :
+              normalizedValue < 0.3 ? '#525252' :
+                normalizedValue < 0.4 ? '#737373' :
+                  normalizedValue < 0.5 ? '#969696' :
+                    normalizedValue < 0.6 ? '#bdbdbd' :
+                      normalizedValue < 0.7 ? '#d9d9d9' :
+                        normalizedValue < 0.8 ? '#f0f0f0' :
+                          normalizedValue < 0.9 ? '#f8f8f8' :
+                            normalizedValue <= 1 ? '#fff' :
+                              '#2171b5';
       } else {
         return d3.interpolateReds(normalizedValue);
       }
     }
 
     // Construire l'URL avec les paramètres de requête annee, zone et option
-    var url;
-    if (selectedOption === 'all' || selectedOption === null) {
-      url = 'http://localhost:5000/japon?annee=' + selectedYear + '&zone=' + zoneValue;
-    } else {
-      url = 'http://localhost:5000/japon?annee=' + selectedYear + '&zone=' + zoneValue + '&options=' + selectedOption;
+    var url = 'http://localhost:5000/japon?annee=' + selectedYear
+    //on va chercher la zone
+    if (zoneValue !== 3) {
+      url += '&zone=' + zoneValue
     }
+    //on regarde les statuts 
+    if (selectedOption !== 'all' && selectedOption !== null) {
+      url += '&options=' + selectedOption;
+    }
+
+
     // Supprimer la couche existante de la carte
     map.eachLayer(function (layer) {
       if (layer instanceof L.GeoJSON) {
@@ -428,6 +470,8 @@ function loadConsensusJapon() {
         console.log(data);
         var minCount = data.min_count;
         var maxCount = data.max_count;
+
+        document.getElementById('maxCount').innerText = "Nombre d'individus filtrés : " + maxCount;
 
         L.geoJson(data.geojson, {
           style: function (feature) {
@@ -521,29 +565,22 @@ function generateLegend(title, colors, labels) {
   legendDiv.innerHTML = legendContent;
 }
 
-// Fonction pour afficher la légende lorsque le bouton est cliqué
-function afficherLegende() {
-  var legend = document.getElementById("legend_groupe");
-  legend.style.display = "block";
-}
-
-// Ajouter un gestionnaire d'événements de clic au bouton pour afficher la légende
-document.getElementById("searchButton").addEventListener("click", afficherLegende);
-
-
-// BUTTON DE RECHERCHE 
-
 document.getElementById('searchButton').addEventListener('click', function () {
   var selectedCategory = document.querySelector('input[name="radio"]:checked').value;
 
   if (selectedCategory === 'Zones jugées sures') {
     var title = 'Pourcentage des enquêtés sélectionnés<br>jugeant la zone sûre';
-    var colors = ['#f7fcfd', '#e5f5f9', '#ccece6', '#99d8c9', '#66c2a4', '#41ae76', '#238b45', '#006d2c', '#00441b'];
+    var colors = ['#fff', '#f7fcfd', '#e5f5f9', '#ccece6', '#99d8c9', '#66c2a4', '#41ae76', '#238b45', '#006d2c', '#00441b', '#003013'];
     var labels = ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'];
     generateLegend(title, colors, labels);
   } else if (selectedCategory === 'Zones jugées dangereuses') {
-    var title = 'Pourcentage des enquêtés sélectionnés<br>jugeant la zone dangereuse'
-    var colors = ['#fff5f0', '#fee0d2', '#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d'];
+    var title = 'Enquêtés sélectionnés jugeant<br>la zone dangereuse (en %)'
+    var colors = ['#fff', '#fff5f0', '#fee0d2', '#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d', '#400008ff'];
+    var labels = ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'];
+    generateLegend(title, colors, labels);
+  } else if (selectedCategory === 'Zones interstitielles') {
+    var title = 'Représentation des zones interstitielles<br>(en % des enquêtés)'
+    var colors = ['#fff', '#f8f8f8', '#f0f0f0', '#d9d9d9', '#bdbdbd', '#969696', '#737373', '#525252', '#252525', '#1f1f1f', '#000000'];
     var labels = ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'];
     generateLegend(title, colors, labels);
   } else {
