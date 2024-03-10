@@ -680,3 +680,8 @@ map.on('layeradd layerremove', function () {
 // Appel initial pour mettre à jour la légende
 updateLegend();
 
+function toggleBVisibility() {
+  var select = document.getElementById("id_dilemSelect");
+  var divB = document.getElementById("B");
+  divB.style.display = select.value ? "block" : "none";
+}

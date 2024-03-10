@@ -105,10 +105,9 @@
                 </h1>
                 <h4>Trajectoire et Perception Individuelle</h4>
                 <hr>
-                <hr>
                 <div>
-                  <h5>Choix de l'individu type</h5>
-                  <select id="id_dilemSelect" size="6">
+                  <h5>Choix de l'individu</h5>
+                  <select id="id_dilemSelect" size="6" onchange="toggleBVisibility()">
                     <option value="">Sélectionnez un ID</option>
                     <option value="ID01">Ueki</option>
                     <option value="ID02">Kato1</option>
@@ -192,7 +191,7 @@
                   <label for="option2">Fukushima</label><br>
                 </div>
                 <hr>
-                <div>
+                <div id="B"  style="display: none;">
                   <h5>Trajectoire de l'individu</h5>
                   <button id="toggleLayer1" aria-label="Afficher/masquer la couche"><i id="Trajectoire"
                       class="far fa-eye"></i></button>
@@ -202,9 +201,8 @@
                   <button id="toggleLayer2" aria-label="Afficher/masquer la couche"><i id="Tracer_risques_indiv"
                       class="far fa-eye"></i></button>
                   <label for="toggleLayer2">Tracé de la perception du risques</label><br>
-                  <hr>
                   <div>
-                    <label for="slider">Choisir une année</label><br>
+                  <h6>Choisir une année pour la perception du risques</h6>
                     <input type="range" id="slider" name="slider" min="2013" max="2017" value="2013" step="2"
                       list="tickmarks">
                     <datalist id="tickmarks">
