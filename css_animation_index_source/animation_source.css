@@ -6,7 +6,6 @@ body {
   /* Center the content vertically */
   flex-flow: wrap;
   font-family: "Allerta Stencile", sans-serif;
-  font-size: small;
 }
 
 body * {
@@ -18,6 +17,7 @@ body * {
   height: 100%;
   margin: 30px;
   margin-top: 80px;
+  font-size: small;
 }
 
 .card-container .card {

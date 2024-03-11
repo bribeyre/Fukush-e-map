@@ -101,3 +101,9 @@ p{
   background-size: cover; /* Ajuster la taille de l'image pour couvrir toute la carte */
   background-position: center; /* Centrer l'image dans la carte */
 }
+
+#accueil {
+  font-size:0.8em;
+  margin-left: 8px;
+  font-family:'Allerta Stencile', sans-serif;
+}
