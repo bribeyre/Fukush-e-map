@@ -27,13 +27,13 @@ def fukushima_geojson():
     sql = f"""
     WITH t AS ( 
         SELECT count(1) AS id_dilem_counts, geom
-        FROM proj_geonum.consensus_fukushima 
+        FROM consensus.consensus_fukushima 
         WHERE annee = %s {where_clause}
         GROUP BY geom 
     ),
     other AS (
         SELECT DISTINCT geom
-        FROM proj_geonum.consensus_fukushima
+        FROM consensus.consensus_fukushima
         EXCEPT 
         SELECT geom FROM t
     ),
@@ -56,7 +56,7 @@ def fukushima_geojson():
     print("Requête SQL pour consensus_fukushima:", sql)
 
     # Exécuter la requête SQL
-    with connect("service=local_geonum") as con:
+    with connect("service=local_fukushemap") as con:
         cur = con.cursor()
         cur.execute(sql, (annee,))
         row = cur.fetchone()
@@ -89,13 +89,13 @@ def japon_geojson():
     sql = f"""
     WITH t AS ( 
     SELECT count(1) AS id_dilem_counts, geom
-    FROM proj_geonum.consensus_japon 
+    FROM consensus.consensus_japon 
     WHERE annee = %s {where_clause}
     GROUP BY geom 
 ),
 other AS (
     SELECT DISTINCT geom
-    FROM proj_geonum.consensus_japon
+    FROM consensus.consensus_japon
     EXCEPT 
     SELECT geom FROM t
 ),
@@ -123,7 +123,7 @@ res AS (
     print("Requête SQL pour consensus_japon:", sql)
 
     # Exécuter la requête SQL
-    with connect("service=local_geonum") as con:
+    with connect("service=local_fukushemap") as con:
         cur = con.cursor()
         cur.execute(sql, (annee,))
         row = cur.fetchone()
